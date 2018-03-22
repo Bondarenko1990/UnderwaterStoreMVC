@@ -17,11 +17,11 @@ namespace WebApplication1.Infrastructure.Data
         public string MailFromAddress = "bondsergeyua@gmail.com";
         public bool UseSsl = true;
         public string Username = "bondsergeyua@gmail.com";
-        public string Password = "infinityfx35";
+        public string Password = "************";
         public string ServerName = "smtp.gmail.com";
         public int ServerPort = 587;
         public bool WriteAsFile = true;
-        public string FileLocation = @"D:\Programming\Projects\Metanit\WebApplication1";
+        public string FileLocation = @"D:\Programming\Projects\WebApplication1";
     }
 
 
