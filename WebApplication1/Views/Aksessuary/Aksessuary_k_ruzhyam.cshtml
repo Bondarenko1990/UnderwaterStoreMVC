@@ -1,0 +1,89 @@
+﻿@using WebApplication1.Domain.Core
+@using WebApplication1.Models
+@using WebApplication1.Helpers
+@model IndexView
+
+@{
+    Layout = "~/Views/Shared/_Product.cshtml";
+    ViewBag.Title = "Пневматика";
+}
+
+<div class="bread">
+    <nav class="breadcrumb">
+        @Html.ActionLink("Главная", "Index", "Home", new { area = "" }, new { @class = "breadcrumb-item" })
+        @Html.ActionLink("Каталог товаров", "Catalog", "Home", new { area = "" }, new { @class = "breadcrumb-item" })
+        @Html.ActionLink("Ружья", "Ruzhya", "Home", new { area = "" }, new { @class = "breadcrumb-item" })
+        <span class="breadcrumb-item active">Аксессуары к ружьям</span>
+    </nav>
+</div>
+<div class="razdel">
+    <h3>Аксессуары к ружьям</h3>
+</div>
+
+        <div class="row">
+                <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                    <a class="picture" href="@Url.Action("Garpun", "Garpun", null)">
+                            <img src="~/Images/garpuni.jpg" />
+                   </a>
+                    <a class="name text-center" href="@Url.Action("Garpun", "Garpun", null)"><span class="middle">Гарпуны</span></a>                   
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                    <a class="picture" href="@Url.Action("Lin", "Lin", null)">
+                        <img src="~/Images/lini.jpg" />
+                    </a>
+                    <a class="name text-center" href="@Url.Action("Lin", "Lin", null)"><span class="middle">Лини</span></a>
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                    <a class="picture" href="@Url.Action("Nakonechnik", "Nakonechnik", null)">
+                        <img src="~/Images/nakonechniki.jpg" />
+                    </a>
+                    <a class="name text-center" href="@Url.Action("Nakonechnik", "Nakonechnik", null)"><span class="middle">Наконечники</span></a>
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                    <a class="picture" href="@Url.Action("Katushka", "Katushka", null)">
+                        <img src="~/Images/katushki.jpg" />
+                    </a>
+                    <a class="name text-center" href="@Url.Action("Katushka", "Katushka", null)"><span class="middle">Катушки</span></a>
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                    <a class="picture" href="@Url.Action("Arbaletnaya_tyaga", "Arbaletnaya_tyaga", null)">
+                        <img src="~/Images/arbalet_tyagi.jpg" />
+                    </a>
+                    <a class="name text-center" href="@Url.Action("Arbaletnaya_tyaga", "Arbaletnaya_tyaga", null)"><span class="middle">Арбалетные тяги</span></a>
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                    <a class="picture" href="@Url.Action("Arbaletniy_zacep", "Arbaletniy_zacep", null)">
+                        <img src="~/Images/arbalet_zacepi.jpg" />
+                    </a>
+                    <a class="name text-center" href="@Url.Action("Arbaletniy_zacep", "Arbaletniy_zacep", null)"><span class="middle">Арбалетные зацепы</span></a>
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                    <a class="picture" href="@Url.Action("Prochee", "Prochee", null)">
+                        <img src="~/Images/prochee.jpg" />
+                    </a>
+                    <a class="name text-center" href="@Url.Action("Prochee", "Prochee", null)"><span class="middle">Прочее</span></a>
+                </div>
+        </div>
+
+
+<p class="text">Делаем отправки во все города Украины:  Киев, Харьков, Днепропетровск, Черкассы, Запорожье, Винница, Кировоград, Полтава, Луганск, Ровно, Херсон, Донецк, Луцк, Симферополь, Хмельницкий, Житомир, Львов, Сумы,  Николаев, Тернополь, Чернигов, Ивано-Франковск, Одесса, Ужгород, Черновцы и другие.	</p>
+
+@section Scripts{
+
+
+    <script>
+        $('.dropdown-menu > .dropdown > a').addClass('dropdown-toggle');
+
+        $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
+            if (!$(this).next().hasClass('show')) {
+                $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+            }
+            var $subMenu = $(this).next(".dropdown-menu");
+            $subMenu.toggleClass('show');
+            $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
+                $('.dropdown-menu > .dropdown .show').removeClass("show");
+            });
+            return false;
+        });
+    </script> 
+}

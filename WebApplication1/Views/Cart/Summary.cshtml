@@ -1,0 +1,18 @@
+﻿@using WebApplication1.Domain.Core
+@model Cart
+
+<div class="cart1">
+    @Html.ActionLink("Корзина", "Index", "Cart",
+        new { returnUrl = Request.Url.PathAndQuery }, new { area = "" })
+</div>
+@if(@Model.Lines.Sum(x => x.Quantity) != 0){
+<div class="Quantity">
+    <span>@Model.Lines.Sum(x => x.Quantity)</span>
+</div>
+}
+
+@if(@Model.Lines.Sum(x => x.Quantity) != 0){
+<div class="cart2 navbar-right">
+    @Model.ComputeTotalValue().ToString("# грн")
+</div>
+}

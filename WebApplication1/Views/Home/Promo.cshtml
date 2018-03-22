@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Акции";
+}
+
+<h3>Акции</h3>
+
+<div class="ramka">
+    <div class="row">
+        <div class="col-xl-4 col-lg-6 m-x-auto">
+            <div class="akcii">
+                <img class="d-block img-fluid" src="http://x-lines.ru/letters/i/cyrillicscript/0672/38B63C/20/0/4no7bqsozdemjwf44nanbwf74nanbwcb4gb7bxgozmeagebigy1o.png">
+
+                <div id="foto">
+                    <img class="d-block img-fluid" src="~/Images/akcii2.jpg" />
+                </div>
+                <h5>Получи сумку за пол цены</h5>
+                @using (Html.BeginForm("Akciya1", "Home", new { }))
+                    {
+                     <button class="btn btn-success" type="submit">Подробнее</button>
+                    }
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 m-x-auto">
+            <div class="akcii">
+                <img class="d-block img-fluid" src="http://x-lines.ru/letters/i/cyrillicscript/0672/38B63C/20/0/4nppbxsozuem9wf54n47bqstoeopbx6ozaopdbsoszem5wfirdeabwcd4n5pddgtth.png">
+
+                <div id="foto">
+                    <img class="d-block img-fluid" src="~/Images/akcii1.jpg" />
+                </div>
+                <h5>Забирай комплект по цене ружья</h5>
+                @using (Html.BeginForm("Akciya2", "Home", new { }))
+                    {
+                     <button class="btn btn-success" type="submit">Подробнее</button>
+                    }
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 m-x-auto">
+            <div class="akcii">
+                <img class="d-block img-fluid" src="http://x-lines.ru/letters/i/cyrillicscript/0672/38B63C/20/0/4nppbxsozuem9wf54n47bqstoeopbx6ozaopdbsoszem5wfirdem3wfo4gy7bqsozy.png">
+
+                <div id="foto">
+                    <img class="d-block img-fluid" src="~/Images/akcii3.jpg" />
+                </div>
+                <h5>Забирай комплект по цене маски</h5>
+                 @using (Html.BeginForm("Akciya3", "Home", new { }))
+                    {
+                     <button class="btn btn-success" type="submit">Подробнее</button>
+                    }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,149 @@
+﻿@model WebApplication1.Domain.Core.Dlya_dayvinga_i_vodnogo_sporta
+
+@{
+    Layout = "~/Views/Shared/_Product.cshtml";
+    ViewBag.Title = "Арбалеты";
+}
+<div class="bread">
+    <nav class="breadcrumb">
+        @Html.ActionLink("Главная", "Index", "Home", new { area = "" }, new { @class = "breadcrumb-item" })
+        @Html.ActionLink("Каталог товаров", "Catalog", "Home", new { area = "" }, new { @class = "breadcrumb-item" })
+        @Html.ActionLink("Гидрокостюмы", "Gidrokostyumy", "Home", new { area = "" }, new { @class = "breadcrumb-item" })
+        @Html.ActionLink("Для дайвинга и водного спорта", "List", "Dlya_dayvinga_i_vodnogo_sporta", new { area = "" }, new { @class = "breadcrumb-item" })
+        <span class="breadcrumb-item active">@Model.Name</span>
+    </nav>
+</div>
+<div class="razdel">
+    <h3>@Model.Name</h3>
+</div>
+<hr />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="pictureModal" href="#">
+                @if (Model.ImageData != null)
+                {
+                    <img src="@Url.Action("GetImage", "Dlya_dayvinga_i_vodnogo_sporta", new { Model.Id })" />
+                }
+            </div>
+        </div>
+        <div class="col-md-5 ml-auto">
+            <div class="headingName text-center font-weight-bold">
+                @Model.Name
+            </div>
+            <div class="heading font-weight-bold">
+                Характеристики
+            </div>
+            <div class="properyTable">
+                <div class="propertyName">
+                    Производитель
+                </div>
+                <div class="propertyValue">
+                    @Model.Brand.Name
+                </div>
+            </div>
+            <div class="properyTable">
+                <div class="propertyName">
+                    Страна
+                </div>
+                <div class="propertyValue">
+                    @Model.Brand.Country
+                </div>
+            </div>
+            <div class="properyTable">
+                <div class="propertyName">
+                    Защита на коленях
+                </div>
+                <div class="propertyValue">
+                    @{string item = "";
+                        if (Model.ZashitaKoleni == true)
+                        { item = "Да"; }
+                        else
+                        { item = "Нет"; }
+                    }
+                    @item
+                </div>
+            </div>
+            <div class="properyTable">
+                <div class="propertyName">
+                    Защита на локтях
+                </div>
+                <div class="propertyValue">
+                    @if (Model.ZashitaLokti == true)
+                    { item = "Да"; }
+                    else
+                    { item = "Нет"; }
+                    @item
+                </div>
+            </div>
+            <div class="properyTable">
+                <div class="propertyName">
+                    Waterstop на рукавах
+                </div>
+                <div class="propertyValue">
+                    @if (Model.WaterstopRukava == true)
+                    { item = "Да"; }
+                    else
+                    { item = "Нет"; }
+                    @item
+                </div>
+            </div>
+            <div class="properyTable">
+                <div class="propertyName">
+                    Waterstop на штанах
+                </div>
+                <div class="propertyValue">
+                    @if (Model.WaterstopShtani == true)
+                    { item = "Да"; }
+                    else
+                    { item = "Нет"; }
+                    @item
+                </div>
+            </div>
+            <div class="properyTable">
+                <div class="propertyName">
+                    Молния
+                </div>
+                <div class="propertyValue">
+                    @Model.Molniya
+                </div>
+            </div>
+            <div class="properyTable">
+                <div class="propertyName">
+                    Толщина
+                </div>
+                <div class="propertyValue">
+                    @Model.Tolshina<span class="measure"> мм</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 ml-auto">
+            <div class="row">
+                <a class="price text-center" style="width:100%; margin-top:15px">@Html.DisplayFor(modelItem => Model.Price)<span> грн</span><span class="measure">/шт</span></a>
+            </div>
+            <div class="row">
+                <div class="addCartmodal">
+                    @using (Html.BeginForm("AddToCart", "Cart"))
+                    {
+                        @Html.Hidden("returnId", Model.Id)
+                        @Html.Hidden("returnUrl", "/Dlya_dayvinga_i_vodnogo_sporta/List")
+                        <input id="cart" type="submit" value="В корзину" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container">
+            <div class="headingDescriptionName font-weight-bold">
+                Описание товара
+            </div>
+            <div class="headingDescription">
+
+                @Html.Raw(Model.Description)
+
+            </div>
+
+        </div>
+    </div>
+</div>

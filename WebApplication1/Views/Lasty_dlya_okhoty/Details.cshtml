@@ -1,0 +1,113 @@
+﻿@model WebApplication1.Domain.Core.Lasty_dlya_okhoty
+
+@{
+    Layout = "~/Views/Shared/_Product.cshtml";
+    ViewBag.Title = "Ласты для охоты";
+}
+<div class="bread">
+    <nav class="breadcrumb">
+        @Html.ActionLink("Главная", "Index", "Home", new { area = "" }, new { @class = "breadcrumb-item" })
+        @Html.ActionLink("Каталог товаров", "Catalog", "Home", new { area = "" }, new { @class = "breadcrumb-item" })
+        @Html.ActionLink("Ласты, Маски, Трубки", "Lasty_maski_trubki", "Home", new { area = "" }, new { @class = "breadcrumb-item" })
+        @Html.ActionLink("Ласты для охоты", "List", "Lasty_dlya_okhoty", new { area = "" }, new { @class = "breadcrumb-item" })
+        <span class="breadcrumb-item active">@Model.Name</span>
+    </nav>
+</div>
+<div class="razdel">
+    <h3>Ласты для подводной охоты @Model.Name</h3>
+</div>
+<hr />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="pictureModal" href="#">
+                @if (Model.ImageData != null)
+                {
+                    <img src="@Url.Action("GetImage", "Lasty_dlya_okhoty", new { Model.Id })" />
+                }
+            </div>
+        </div>
+        <div class="col-md-5 ml-auto">
+            <div class="headingName text-center font-weight-bold">
+                @Model.Name
+            </div>
+            <div class="heading font-weight-bold">
+                Характеристики
+            </div>
+            <div class="properyTable">
+                <div class="propertyName">
+                    Производитель
+                </div>
+                <div class="propertyValue">
+                    @Model.Brand.Name
+                </div>
+            </div>
+            <div class="properyTable">
+                <div class="propertyName">
+                    Страна
+                </div>
+                <div class="propertyValue">
+                    @Model.Brand.Country
+                </div>
+            </div>
+            <div class="properyTable">
+                <div class="propertyName">
+                    Пятка
+                </div>
+                <div class="propertyValue">
+                    @Model.Pyatka
+                </div>
+            </div>
+            <div class="properyTable">
+                <div class="propertyName">
+                    Лопасть
+                </div>
+                <div class="propertyValue">
+                    @Model.Lopast
+                </div>
+            </div>
+            <div class="properyTable">
+                <div class="propertyName">
+                    Материал лопасти
+                </div>
+                <div class="propertyValue">
+                    @Model.Material
+                </div>
+            </div>
+            <div class="properyTable">
+                <div class="propertyName">
+                    Длина лопасти
+                </div>
+                <div class="propertyValue">
+                    @Model.Length<span class="measure"> cм</span>
+                </div>
+            </div>           
+        </div>
+        <div class="col-md-2 ml-auto">
+            <div class="row">
+                <a class="price text-center" style="width:100%; margin-top:15px">@Html.DisplayFor(modelItem => Model.Price)<span> грн</span><span class="measure">/шт</span></a>
+            </div>
+            <div class="row">
+                <div class="addCartmodal">
+                    @using (Html.BeginForm("AddToCart", "Cart"))
+                    {
+                        @Html.Hidden("returnId", Model.Id)
+                        @Html.Hidden("returnUrl", "/Lasty_dlya_okhoty/List")
+                        <input id="cart" type="submit" value="В корзину" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container">
+            <div class="headingDescriptionName font-weight-bold">
+                Описание товара
+            </div>
+            <div class="headingDescription">
+                @Html.Raw(Model.Description)
+            </div>
+        </div>
+    </div>
+</div>
+

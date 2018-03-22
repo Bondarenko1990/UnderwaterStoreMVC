@@ -1,0 +1,64 @@
+﻿@model WebApplication1.Domain.Core.Bui_i_aksessuary
+
+<div class="modal-content">
+    <div class="modal-header getFastViewModal bg-dark">
+        <p class="text-center TextModal">Быстрый просмотр</p>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="pictureModal" href="#">
+                    @if (Model.ImageData != null)
+                    {
+                        <img src="@Url.Action("GetImage", "Bui_i_aksessuary", new { Model.Id })" />
+                    }
+                </div>
+            </div>
+            <div class="col-md-5 ml-auto">
+                <div class="headingName text-center font-weight-bold">
+                    @Model.Name
+                </div>
+                <div class="heading font-weight-bold">
+                    Характеристики
+                </div>
+                <div class="properyTable">
+                    <div class="propertyName">
+                        Производитель
+                    </div>
+                    <div class="propertyValue">
+                        @Model.Brand.Name
+                    </div>
+                </div>
+                <div class="properyTable">
+                    <div class="propertyName">
+                        Страна
+                    </div>
+                    <div class="propertyValue">
+                        @Model.Brand.Country
+                    </div>
+                </div>
+                <div class="headingFooter">
+                    @Html.ActionLink("Больше информации о товаре", "Details", new { id = Model.Id }, new { @class = "compItem" })
+                </div>
+            </div>
+            <div class="col-md-3 ml-auto">
+                <div class="row">
+                    <a class="price text-center" style="width:100%; margin-top:15px">@Html.DisplayFor(modelItem => Model.Price)<span> грн</span><span class="measure">/шт</span></a>
+                </div>
+                <div class="row">
+                    <div class="addCartmodal">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", Model.Id)
+                            @Html.Hidden("returnUrl", "/Bui_i_aksessuary/List")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

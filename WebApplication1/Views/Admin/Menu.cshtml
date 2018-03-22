@@ -1,0 +1,87 @@
+﻿@using WebApplication1.Domain.Core
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="panel panel-default">
+    <div class="row">
+        <div class="nav-catalog" id="admin">
+            <nav class="navbar navbar-dark">
+                @Html.ActionLink("Каталог товаров", "Catalog", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <button class="navbar-toggler btn_collapse float-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse slider_collapse collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Гидрокостюмы</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li>@Html.ActionLink("Штаны и Куртки", "Index", "Shtany_i_kurtki", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Для подводной охоты", "Index", "Dlya_podvodnoy_okhoty", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Для дайвинга и водного спорта", "Index", "Dlya_dayvinga_i_vodnogo_sporta", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Футболки и шорты для водного спорта", "Index", "Futbolki_i_shorty_dlya_vodnogo_sporta", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Сухие", "Index", "Sukhie", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Аксессуары", "Index", "Aksessuary", new { area = "" }, new { @class = "dropdown-item" })</li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ружья</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li>@Html.ActionLink("Пневматика", "Index", "Pneumatic", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Арбалеты", "Index", "Arbalet", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Аксессуары к ружьям", "Index", "Aksessuary", new { area = "" }, new { @class = "dropdown-item" })</li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ласты,Маски,Трубки</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li>@Html.ActionLink("Маски", "Index", "Maski", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Трубки", "Index", "Trubki", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Ласты для охоты", "Index", "Lasty_dlya_okhoty", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Ласты для дайвинга", "Index", "Lasty_dlya_dayvinga", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Комплекты", "Index", "Komplekty", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Аксессуары", "Index", "Aksessuary", new { area = "" }, new { @class = "dropdown-item" })</li>
+
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Носки,Боты,Перчатки</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li>@Html.ActionLink("Перчатки", "Index", "Perchatki", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Носки", "Index", "Noski", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Рукавицы", "Index", "Rukavitsy", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Боты", "Index", "Boty", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Тапочки", "Index", "Tapochki", new { area = "" }, new { @class = "dropdown-item" })</li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ножи,Фонари,Груза</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li>@Html.ActionLink("Фонари", "Index", "Fonari", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Ножи", "Index", "Nozhi", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Груза и Грузовые системы", "Index", "Gruza_i_gruzovye_sistemy", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Аксессуары", "Index", "Aksessuary", new { area = "" }, new { @class = "dropdown-item" })</li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Дополнительно</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li>@Html.ActionLink("Куканы", "Index", "Kukany", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Буи и аксессуары", "Index", "Bui_i_aksessuary", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Химические средства и масла", "Index", "Khimicheskie_sredstva_i_masla", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Катушки ходовые", "Index", "Katushki_khodovye", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Чехлы,сетки", "Index", "Chekhly_setki", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Муляжи", "Index", "Mulyazhi", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Полезные аксессуары", "Index", "Poleznye_aksessuary", new { area = "" }, new { @class = "dropdown-item" })</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+

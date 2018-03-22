@@ -1,0 +1,119 @@
+﻿@model WebApplication1.Domain.Core.Noski
+
+<div class="modal-content">
+    <div class="modal-header getFastViewModal bg-dark">
+        <p class="text-center TextModal">Быстрый просмотр</p>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="pictureModal" href="#">
+                    @if (Model.ImageData != null)
+                    {
+                        <img src="@Url.Action("GetImage", "Noski", new { Model.Id })" />
+                    }
+                </div>
+            </div>
+            <div class="col-md-5 ml-auto">
+                <div class="headingName text-center font-weight-bold">
+                    @Model.Name
+                </div>
+                <div class="heading font-weight-bold">
+                    Характеристики
+                </div>
+                <div class="properyTable">
+                    <div class="propertyName">
+                        Производитель
+                    </div>
+                    <div class="propertyValue">
+                        @Model.Brand.Name
+                    </div>
+                </div>
+                <div class="properyTable">
+                    <div class="propertyName">
+                        Страна
+                    </div>
+                    <div class="propertyValue">
+                        @Model.Brand.Country
+                    </div>
+                </div>
+                <div class="properyTable">
+                    <div class="propertyName">
+                        Подошва
+                    </div>
+                    <div class="propertyValue">
+                        @if (Model.Podoshva == "Нет данных")
+                        {<span>Нет данных</span>}
+                        else
+                        {<span>@Model.Podoshva</span>}
+                    </div>
+                </div>
+                <div class="properyTable">
+                    <div class="propertyName">
+                        Покрытие внешнее
+                    </div>
+                    <div class="propertyValue">
+                        @if (Model.PokritieVneshnee == "Нет данных")
+                        {<span>Нет данных</span>}
+                        else
+                        {<span>@Model.PokritieVneshnee</span>}
+                    </div>
+                </div>
+                <div class="properyTable">
+                    <div class="propertyName">
+                        Покрытие внутреннее
+                    </div>
+                    <div class="propertyValue">
+                        @if (Model.PokritieVnutrenee == "Нет данных")
+                        {<span>Нет данных</span>}
+                        else
+                        {<span>@Model.PokritieVnutrenee</span>}
+                    </div>
+                </div>
+                <div class="properyTable">
+                    <div class="propertyName">
+                        Манжеты из голого неопрена
+                    </div>
+                    <div class="propertyValue">
+                        @if (Model.Mangeti == false)
+                        {<span>Нет</span>}
+                        else
+                        {<span>ДА</span>}
+                    </div>
+                </div>
+                <div class="properyTable">
+                    <div class="propertyName">
+                        Толщина
+                    </div>
+                    <div class="propertyValue">
+                        @if (Model.Tolshina == 0)
+                        {<span>Нет данных</span>}
+                        else
+                        {<span>@Model.Tolshina мм</span>}
+                    </div>
+                </div>
+                <div class="headingFooter">
+                    @Html.ActionLink("Больше информации о товаре", "Details", new { id = Model.Id }, new { @class = "compItem" })
+                </div>
+            </div>
+            <div class="col-md-3 ml-auto">
+                <div class="row">
+                    <a class="price text-center" style="width:100%; margin-top:15px">@Html.DisplayFor(modelItem => Model.Price)<span> грн</span><span class="measure">/шт</span></a>
+                </div>
+                <div class="row">
+                    <div class="addCartmodal">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", Model.Id)
+                            @Html.Hidden("returnUrl", "/Noski/List")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

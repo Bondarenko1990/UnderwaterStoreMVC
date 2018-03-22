@@ -1,0 +1,77 @@
+﻿@using WebApplication1.Domain.Core
+@using WebApplication1.Models
+@using WebApplication1.Helpers
+@model IndexView
+
+@{
+    Layout = "~/Views/Shared/_Product.cshtml";
+    ViewBag.Title = "Носки, Боты, Перчатки";
+}
+
+<div class="bread">
+    <nav class="breadcrumb">
+        @Html.ActionLink("Главная", "Index", "Home", new { area = "" }, new { @class = "breadcrumb-item" })
+        @Html.ActionLink("Каталог товаров", "Catalog", "Home", new { area = "" }, new { @class = "breadcrumb-item" })
+        <span class="breadcrumb-item active">Носки, Боты, Перчатки</span>
+    </nav>
+</div>
+<div class="razdel">
+    <h3>Носки, Боты, Перчатки</h3>
+</div>
+
+<div class="row">
+    <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+        <a class="picture" href="@Url.Action("List", "Perchatki", null)">
+            <img src="~/Images/perchatki.jpg" />
+        </a>
+        <a class="name text-center" href="@Url.Action("List", "Perchatki", null)"><span class="middle">Перчатки</span></a>
+    </div>
+    <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+        <a class="picture" href="@Url.Action("List", "Noski", null)">
+            <img src="~/Images/noski.jpg" />
+        </a>
+        <a class="name text-center" href="@Url.Action("List", "Noski", null)"><span class="middle">Носки</span></a>
+    </div>
+    <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+        <a class="picture" href="@Url.Action("List", "Rukavitsy", null)">
+            <img src="~/Images/rukavitsi.jpg" />
+        </a>
+        <a class="name text-center" href="@Url.Action("List", "Rukavitsy", null)"><span class="middle">Рукавицы</span></a>
+    </div>
+    <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+        <a class="picture" href="@Url.Action("List", "Boty", null)">
+            <img src="~/Images/boty.jpg" />
+        </a>
+        <a class="name text-center" href="@Url.Action("List", "Boty", null)"><span class="middle">Боты</span></a>
+    </div>
+    <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+        <a class="picture" href="@Url.Action("List", "Tapochki", null)">
+            <img src="~/Images/tapochki.jpg" />
+        </a>
+        <a class="name text-center" href="@Url.Action("List", "Tapochki", null)"><span class="middle">Тапочки</span></a>
+    </div>
+</div>
+
+
+<p class="text">Делаем отправки во все города Украины:  Киев, Харьков, Днепропетровск, Черкассы, Запорожье, Винница, Кировоград, Полтава, Луганск, Ровно, Херсон, Донецк, Луцк, Симферополь, Хмельницкий, Житомир, Львов, Сумы,  Николаев, Тернополь, Чернигов, Ивано-Франковск, Одесса, Ужгород, Черновцы и другие.	</p>
+
+@section Scripts{
+
+
+    <script>
+        $('.dropdown-menu > .dropdown > a').addClass('dropdown-toggle');
+
+        $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
+            if (!$(this).next().hasClass('show')) {
+                $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+            }
+            var $subMenu = $(this).next(".dropdown-menu");
+            $subMenu.toggleClass('show');
+            $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
+                $('.dropdown-menu > .dropdown .show').removeClass("show");
+            });
+            return false;
+        });
+    </script>
+}
+

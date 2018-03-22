@@ -1,0 +1,82 @@
+﻿@model WebApplication1.Domain.Core.Aksessuary_k_trubkam
+
+@{
+    Layout = "~/Views/Shared/_Product.cshtml";
+    ViewBag.Title = "Аксессуары к трубкам";
+}
+<div class="bread">
+    <nav class="breadcrumb">
+        @Html.ActionLink("Главная", "Index", "Home", new { area = "" }, new { @class = "breadcrumb-item" })
+        @Html.ActionLink("Каталог товаров", "Catalog", "Home", new { area = "" }, new { @class = "breadcrumb-item" })
+        @Html.ActionLink("Ласты, Маски, Трубки", "Lasty_maski_trubki", "Home", new { area = "" }, new { @class = "breadcrumb-item" })
+        @Html.ActionLink("Аксессуары", "Aksessuary_k_lasti_maski_trubki", "Aksessuary", new { area = "" }, new { @class = "breadcrumb-item" })
+        @Html.ActionLink("Аксессуары к трубкам", "List", "Aksessuary_k_trubkam", new { area = "" }, new { @class = "breadcrumb-item" })
+        <span class="breadcrumb-item active">@Model.Name</span>
+    </nav>
+</div>
+<div class="razdel">
+    <h3>@Model.Name</h3>
+</div>
+<hr />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="pictureModal" href="#">
+                @if (Model.ImageData != null)
+                {
+                    <img src="@Url.Action("GetImage", "Aksessuary_k_trubkam", new { Model.Id })" />
+                }
+            </div>
+        </div>
+        <div class="col-md-5 ml-auto">
+            <div class="headingName text-center font-weight-bold">
+                @Model.Name
+            </div>
+            <div class="heading font-weight-bold">
+                Характеристики
+            </div>
+            <div class="properyTable">
+                <div class="propertyName">
+                    Производитель
+                </div>
+                <div class="propertyValue">
+                    @Model.Brand.Name
+                </div>
+            </div>
+            <div class="properyTable">
+                <div class="propertyName">
+                    Страна
+                </div>
+                <div class="propertyValue">
+                    @Model.Brand.Country
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 ml-auto">
+            <div class="row">
+                <a class="price text-center" style="width:100%; margin-top:15px">@Html.DisplayFor(modelItem => Model.Price)<span> грн</span><span class="measure">/шт</span></a>
+            </div>
+            <div class="row">
+                <div class="addCartmodal">
+                    @using (Html.BeginForm("AddToCart", "Cart"))
+                    {
+                        @Html.Hidden("returnId", Model.Id)
+                        @Html.Hidden("returnUrl", "/Aksessuary_k_trubkam/List")
+                        <input id="cart" type="submit" value="В корзину" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container">
+            <div class="headingDescriptionName font-weight-bold">
+                Описание товара
+            </div>
+            <div class="headingDescription">
+                @Html.Raw(Model.Description)
+            </div>
+        </div>
+    </div>
+</div>
+

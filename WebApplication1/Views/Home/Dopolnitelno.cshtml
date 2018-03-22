@@ -1,0 +1,89 @@
+﻿@using WebApplication1.Domain.Core
+@using WebApplication1.Models
+@using WebApplication1.Helpers
+@model IndexView
+
+@{
+    Layout = "~/Views/Shared/_Product.cshtml";
+    ViewBag.Title = "Дополнительно";
+}
+
+<div class="bread">
+    <nav class="breadcrumb">
+        @Html.ActionLink("Главная", "Index", "Home", new { area = "" }, new { @class = "breadcrumb-item" })
+        @Html.ActionLink("Каталог товаров", "Catalog", "Home", new { area = "" }, new { @class = "breadcrumb-item" })
+        <span class="breadcrumb-item active">Дополнительно</span>
+    </nav>
+</div>
+<div class="razdel">
+    <h3>Дополнительно</h3>
+</div>
+
+<div class="row">
+    <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+        <a class="picture" href="@Url.Action("List", "Khimicheskie_sredstva_i_masla", null)">
+            <img src="~/Images/khimicheskie_sredstva_i_masla.jpg" />
+        </a>
+        <a class="name text-center" href="@Url.Action("List", "Khimicheskie_sredstva_i_masla", null)"><span class="middle">Химические средства и масла</span></a>
+    </div>
+    <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+        <a class="picture" href="@Url.Action("List", "Kukany", null)">
+            <img src="~/Images/kukany.jpg" />
+        </a>
+        <a class="name text-center" href="@Url.Action("List", "Kukany", null)"><span class="middle">Куканы</span></a>
+    </div>
+    <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+        <a class="picture" href="@Url.Action("List", "Bui_i_aksessuary", null)">
+            <img src="~/Images/bui_i_aksessuary.jpg" />
+        </a>
+        <a class="name text-center" href="@Url.Action("List", "Bui_i_aksessuary", null)"><span class="middle">Буи и аксессуары</span></a>
+    </div>
+    <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+        <a class="picture" href="@Url.Action("List", "Chekhly_setki", null)">
+            <img src="~/Images/chekhly_setki.jpg" />
+        </a>
+        <a class="name text-center" href="@Url.Action("List", "Chekhly_setki", null)"><span class="middle">Чехлы, сетки</span></a>
+    </div>
+    <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+        <a class="picture" href="@Url.Action("List", "Katushki_khodovye", null)">
+            <img src="~/Images/katushki_khodovye.jpg" />
+        </a>
+        <a class="name text-center" href="@Url.Action("List", "Katushki_khodovye", null)"><span class="middle">Катушки ходовые</span></a>
+    </div>
+    <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+        <a class="picture" href="@Url.Action("List", "Mulyazhi", null)">
+            <img src="~/Images/mulyazhi.jpeg" />
+        </a>
+        <a class="name text-center" href="@Url.Action("List", "Mulyazhi", null)"><span class="middle">Муляжи</span></a>
+    </div>
+    <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+        <a class="picture" href="@Url.Action("List", "Poleznye_aksessuary", null)">
+            <img src="~/Images/poleznye_aksessuary.jpg" />
+        </a>
+        <a class="name text-center" href="@Url.Action("List", "Poleznye_aksessuary", null)"><span class="middle">Полезные аксессуары</span></a>
+    </div>
+</div>
+
+
+<p class="text">Делаем отправки во все города Украины:  Киев, Харьков, Днепропетровск, Черкассы, Запорожье, Винница, Кировоград, Полтава, Луганск, Ровно, Херсон, Донецк, Луцк, Симферополь, Хмельницкий, Житомир, Львов, Сумы,  Николаев, Тернополь, Чернигов, Ивано-Франковск, Одесса, Ужгород, Черновцы и другие.	</p>
+
+@section Scripts{
+
+
+    <script>
+        $('.dropdown-menu > .dropdown > a').addClass('dropdown-toggle');
+
+        $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
+            if (!$(this).next().hasClass('show')) {
+                $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+            }
+            var $subMenu = $(this).next(".dropdown-menu");
+            $subMenu.toggleClass('show');
+            $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
+                $('.dropdown-menu > .dropdown .show').removeClass("show");
+            });
+            return false;
+        });
+    </script>
+}
+

@@ -1,0 +1,264 @@
+﻿@using WebApplication1.Domain.Core
+@using WebApplication1.Models
+@model IndexView
+@{
+    Layout = null;
+    ViewBag.Title = "Для подводной охоты";
+}
+<div id="results">
+    <div class="input">
+        <p>Розничная цена, грн</p>
+        <input type="hidden" value="@ViewBag.MinPrice" id="MinPrice" />
+        <input type="hidden" value="@ViewBag.MaxPrice" id="MaxPrice" />
+        <p>
+            <label for="amount">От</label>
+            <input type="text" id="false" name="MinPrice" value="@ViewBag.CheckedMinPrice" style="border: 1px solid #cccccc; color:#f6931f; font-weight:bold; width:80px;">
+            <label for="amount_1">До</label>
+            <input type="text" id="false" name="MaxPrice" value="@ViewBag.CheckedMaxPrice" style="border: 1px solid #cccccc; color:#f6931f; font-weight:bold; width:80px;">
+        </p>
+        <br />
+        <div id="slider-range" name="slider" style="width:70%;"></div>
+        <br />
+    </div>
+    <hr />
+    <div class="input">
+        <p>Производитель</p>
+        @foreach (var item in ViewBag.Brands)
+        {
+
+            var Flag = false;
+            <input type="checkbox" name="brand" id="false" value="@item"
+                   @foreach (var s in Model.Dlya_podvodnoy_okhotys) { if (item == s.Brand.Name) { Flag = true; } }
+                   @if (ViewBag.CheckedBrand == 0) { @(Flag == false ? "disabled=\"disabled\"" : "") }
+                   @((Flag == true && ViewBag.CheckedBrand == 1) ? "checked=\"checked\"" : "")
+                   @if (ViewBag.CheckedCount > 1) { @(Flag == false ? "disabled=\"disabled\"" : "") } /> @item<br />
+
+            }
+    </div>
+    <hr />
+    <div class="input">
+        <p>Страна</p>
+
+        @foreach (var item in ViewBag.Countries)
+        {
+            var Flag = false;
+            <input type="checkbox" name="country" id="false" value="@item"
+                   @foreach (var s in Model.Dlya_podvodnoy_okhotys) { if (item == s.Brand.Country) { Flag = true; } }
+                   @if (ViewBag.CheckedCountry == 0) { @(Flag == false ? "disabled=\"disabled\"" : "") }
+                   @((Flag == true && ViewBag.CheckedCountry == 1) ? "checked=\"checked\"" : "")
+                   @if (ViewBag.CheckedCount > 1) { @(Flag == false ? "disabled=\"disabled\"" : "") } /> @item <br />
+
+            }
+    </div>
+    <hr />
+    <div class="input">
+        <p>Защита на коленях</p>
+
+        @foreach (var item in ViewBag.ZashitaKoleni)
+        {
+            string itemEdit = "";
+            if (item == true)
+            { itemEdit = "Да"; }
+            else
+            { itemEdit = "Нет"; }
+            var Flag = false;
+            <input type="checkbox" name="zashitaKoleni" id="false" value="@item.ToString()"
+                   @foreach (var s in Model.Dlya_podvodnoy_okhotys) { if (item == s.ZashitaKoleni) { Flag = true; } }
+                   @if (ViewBag.CheckedZashitaKoleni == 0) { @(Flag == false ? "disabled=\"disabled\"" : "") }
+                   @((Flag == true && ViewBag.CheckedZashitaKoleni == 1) ? "checked=\"checked\"" : "")
+                   @if (ViewBag.CheckedCount > 1) { @(Flag == false ? "disabled=\"disabled\"" : "") } /> @itemEdit <br />
+
+            }
+    </div>
+    <hr />
+
+    <div class="input">
+        <p>Защита на локтях</p>
+
+        @foreach (var item in ViewBag.ZashitaLokti)
+        {
+            string itemEdit = "";
+            if (item == true)
+            { itemEdit = "Да"; }
+            else
+            { itemEdit = "Нет"; }
+            var Flag = false;
+            <input type="checkbox" name="zashitaLokti" id="false" value="@item.ToString()"
+                   @foreach (var s in Model.Dlya_podvodnoy_okhotys) { if (item == s.ZashitaLokti) { Flag = true; } }
+                   @if (ViewBag.CheckedZashitaLokti == 0) { @(Flag == false ? "disabled=\"disabled\"" : "") }
+                   @((Flag == true && ViewBag.CheckedZashitaLokti == 1) ? "checked=\"checked\"" : "")
+                   @if (ViewBag.CheckedCount > 1) { @(Flag == false ? "disabled=\"disabled\"" : "") } /> @itemEdit <br />
+
+            }
+    </div>
+    <hr />
+
+    <div class="input">
+        <p>Покрытие внешнее</p>
+
+        @foreach (var item in ViewBag.PokritieVneshnee)
+        {
+            var Flag = false;
+            <input type="checkbox" name="pokritieVneshnee" id="false" value="@item"
+                   @foreach (var s in Model.Dlya_podvodnoy_okhotys) { if (item == s.PokritieVneshnee) { Flag = true; } }
+                   @if (ViewBag.CheckedPokritieVneshnee == 0) { @(Flag == false ? "disabled=\"disabled\"" : "") }
+                   @((Flag == true && ViewBag.CheckedPokritieVneshnee == 1) ? "checked=\"checked\"" : "")
+                   @if (ViewBag.CheckedCount > 1) { @(Flag == false ? "disabled=\"disabled\"" : "") } /> @item <br />
+
+            }
+    </div>
+    <hr />
+
+    <div class="input">
+        <p>Покрытие внутреннее</p>
+
+        @foreach (var item in ViewBag.PokritieVnutrenee)
+        {
+            var Flag = false;
+            <input type="checkbox" name="pokritieVnutrenee" id="false" value="@item"
+                   @foreach (var s in Model.Dlya_podvodnoy_okhotys) { if (item == s.PokritieVnutrenee) { Flag = true; } }
+                   @if (ViewBag.CheckedPokritieVnutrenee == 0) { @(Flag == false ? "disabled=\"disabled\"" : "") }
+                   @((Flag == true && ViewBag.CheckedPokritieVnutrenee == 1) ? "checked=\"checked\"" : "")
+                   @if (ViewBag.CheckedCount > 1) { @(Flag == false ? "disabled=\"disabled\"" : "") } /> @item <br />
+
+            }
+    </div>
+    <hr />    
+    <div class="input">
+        <p>Толщина, мм</p>
+
+        @foreach (var item in ViewBag.Tolshina)
+        {
+            var Flag = false;
+            <input type="checkbox" name="tolshina" id="false" value="@item"
+                   @foreach (var s in Model.Dlya_podvodnoy_okhotys) { if (item == s.Tolshina) { Flag = true; } }
+                   @if (ViewBag.CheckedTolshina == 0) { @(Flag == false ? "disabled=\"disabled\"" : "") }
+                   @((Flag == true && ViewBag.CheckedTolshina == 1) ? "checked=\"checked\"" : "")
+                   @if (ViewBag.CheckedCount > 1) { @(Flag == false ? "disabled=\"disabled\"" : "") } /> @item <br />
+
+            }
+    </div>
+    <hr />
+</div>
+
+<script type="text/javascript">
+   jQuery("#slider-range").slider({
+	stop: function(event, ui) {
+        myFunction();
+    }
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        var MinPrice = parseInt($("#MinPrice").val());
+        var MaxPrice = parseInt($("#MaxPrice").val());
+        var CheckedMinPrice = parseInt($('input[name="MinPrice"]').val());
+        var CheckedMaxPrice = parseInt($('input[name="MaxPrice"]').val());
+        $("#slider-range").slider({
+            step: 1,
+            range: true,
+            min: MinPrice,
+            max: MaxPrice,
+            values: [CheckedMinPrice, CheckedMaxPrice],
+            slide: function (event, ui) {
+                $('input[name="MinPrice"]').val(ui.values[0]);
+                $('input[name="MaxPrice"]').val(ui.values[1]);
+            }
+        });
+        $('input[name="MinPrice"]').val($("#slider-range").slider("values", 0));
+        $('input[name="MaxPrice"]').val($("#slider-range").slider("values", 1));
+        $('input[name="MinPrice"]').change(function () {
+            var value1 = $('input[name="MinPrice"]').val();
+            var value2 = $('input[name="MaxPrice"]').val();
+            if (parseInt(value1) > parseInt(value2)) {
+                value1 = value2;
+                $('input[name="MinPrice"]').val(value1);
+            }
+            $("#slider-range").slider("values", 0, value1);
+            myFunction();
+        });
+
+        $('input[name="MaxPrice"]').change(function () {
+            var value1 = $('input[name="MinPrice"]').val();
+            var value2 = $('input[name="MaxPrice"]').val();
+            if (parseInt(value1) > parseInt(value2)) {
+                value2 = value1;
+                $('input[name="MinPrice"]').val(value2);
+            }
+            $("#slider-range").slider("values", 1, value2);
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("input#false").change(function() {
+            myFunction();
+        });
+    });
+</script>
+<script>
+    function myFunction() {
+
+                var minPrice;
+                var maxPrice;
+                var brand1 = new Array();
+                var country1 = new Array();
+                var zashitaKoleni1 = new Array();
+                var zashitaLokti1 = new Array();
+                var pokritieVneshnee1 = new Array();
+                var pokritieVnutrenee1 = new Array();
+                var tolshina1 = new Array();
+
+                minPrice = $('input[name="MinPrice"]').val();
+                maxPrice = $('input[name="MaxPrice"]').val();
+
+                $("input[name=brand]:checked").each(function () {
+                    brand1.push($(this).val());
+                });
+
+                $("input[name=country]:checked").each(function () {
+                    country1.push($(this).val());
+                });
+
+                $("input[name=zashitaKoleni]:checked").each(function () {
+                    zashitaKoleni1.push($(this).val());
+                });
+
+                $("input[name=zashitaLokti]:checked").each(function () {
+                    zashitaLokti1.push($(this).val());
+                });
+
+                $("input[name=pokritieVneshnee]:checked").each(function () {
+                    pokritieVneshnee1.push($(this).val());
+                });
+
+                $("input[name=pokritieVnutrenee]:checked").each(function () {
+                    pokritieVnutrenee1.push($(this).val());
+                });
+
+                $("input[name=tolshina]:checked").each(function () {
+                    tolshina1.push($(this).val());
+                });
+
+                var dat = { MinPrice: minPrice, MaxPrice: maxPrice, brand: brand1, country: country1, zashitaKoleni: zashitaKoleni1, zashitaLokti: zashitaLokti1, pokritieVneshnee: pokritieVneshnee1, pokritieVnutrenee: pokritieVnutrenee1, tolshina: tolshina1 };
+
+                var url = "@Url.Action("Filter", "Dlya_podvodnoy_okhoty")";
+                $("#results").load(url, dat, function () {
+                    CounFunction();
+                });
+                function CounFunction() {
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: "/Dlya_podvodnoy_okhoty/Count",
+                        traditional: true,
+                        data: dat,
+                        success: function (data) {
+                            $("#submit").val("Показать(" + data + ")");
+                        },
+                    })
+                }
+        }
+</script>
+

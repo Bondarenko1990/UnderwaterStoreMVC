@@ -1,0 +1,92 @@
+﻿@using WebApplication1.Models
+@using WebApplication1.Helpers
+@model IndexView
+@{
+    /**/
+
+    Layout = null;
+    ViewBag.Title = "Куканы";
+}
+
+<div id="modDialog" class="modal fade bd-example-modal-lg">
+    <div id="dialogContent" class="modal-dialog modal-dialog-centered"></div>
+</div>
+
+<div id="models">
+    <div class="menu_items">
+        <div class="row">
+            @foreach (var s in Model.Kukanys)
+            {
+                <div class="tabloid-item col-xl-2 col-lg-4 col-md-6 col-sm-6">
+                    <div class="picture">
+                        @if (s.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Kukany", new { s.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", new { id = s.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Kukany", new { id = s.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Kukany", new { id = s.Id })"><span class="middle">@Html.DisplayFor(modelItem => s.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => s.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", s.Id)
+                            @Html.Hidden("returnUrl", "/Kukany/List")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    @if (Model.PageInfo.TotalItems > 24)
+    {
+        <div class="row">
+            <div class="viewindex mx-auto" style="margin:55px 0 25px 0; border: 0.5px solid #28a745; border-radius:0.25rem;">
+                <div class="viewindex btn-group">
+                    @Html.PageLinks(Model.PageInfo, x => Url.Action("List", new { page = x }))
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script type="text/javascript">
+        $(function () {
+            $(".tabloid-item").mouseover(function () {
+                $(this).children(".addCart").css("display", "block");
+                $(this).css("margin-bottom", "-70px");
+                $(this).css("z-index", "100");
+                $(this).css("background-color", "white");
+            });
+            $(".tabloid-item").mouseout(function () {
+                $(this).children(".addCart").css("display", "none");
+                $(this).css("margin-bottom", "0");
+                $(this).css("z-index", "0");
+            });
+        });
+</script>
+<script type="text/javascript">
+
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $(".getFastView").click(function (e) {
+
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+        })
+</script>
+<script type="text/javascript">
+        $(function () {
+            $(".picture").on('click', ':not(a.getFastView)', function () {
+                var url = $(this).parent().children("#RedirectTo").val();
+                window.location.href = url;
+            });
+        });
+</script>
+

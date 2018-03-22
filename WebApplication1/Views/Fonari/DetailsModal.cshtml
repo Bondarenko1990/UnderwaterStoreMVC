@@ -1,0 +1,117 @@
+﻿@model WebApplication1.Domain.Core.Fonari
+
+<div class="modal-content">
+    <div class="modal-header getFastViewModal bg-dark">
+        <p class="text-center TextModal">Быстрый просмотр</p>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="pictureModal" href="#">
+                    @if (Model.ImageData != null)
+                    {
+                        <img src="@Url.Action("GetImage", "Fonari", new { Model.Id })" />
+                    }
+                </div>
+            </div>
+            <div class="col-md-5 ml-auto">
+                <div class="headingName text-center font-weight-bold">
+                    @Model.Name
+                </div>
+                <div class="heading font-weight-bold">
+                    Характеристики
+                </div>
+                <div class="properyTable">
+                    <div class="propertyName">
+                        Производитель
+                    </div>
+                    <div class="propertyValue">
+                        @Model.Brand.Name
+                    </div>
+                </div>
+                <div class="properyTable">
+                    <div class="propertyName">
+                        Страна
+                    </div>
+                    <div class="propertyValue">
+                        @Model.Brand.Country
+                    </div>
+                </div>
+                <div class="properyTable">
+                    <div class="propertyName">
+                        Тип лампы
+                    </div>
+                    <div class="propertyValue">
+                        @Model.TypeLamp
+                    </div>
+                </div>
+                <div class="properyTable">
+                    <div class="propertyName">
+                        Тип батареи
+                    </div>
+                    <div class="propertyValue">
+                        @if(Model.TypeBattery == "Нет данных") {<span>Нет данных</span>}
+                        else {<span>@Model.TypeBattery</span>}
+                    </div>
+                </div>
+                <div class="properyTable">
+                    <div class="propertyName">
+                        Световой поток
+                    </div>
+                    <div class="propertyValue">
+                        @if(Model.Svet == 0) {<span>Нет данных</span>}
+                        else {<span>@Model.Svet люмен</span>}
+                    </div>
+                </div>
+                <div class="properyTable">
+                    <div class="propertyName">
+                        Время работы
+                    </div>
+                    <div class="propertyValue">
+                        @if(Model.TimeWork == 0) {<span>Нет данных</span>}
+                        else {<span>@Model.TimeWork часов</span>}
+                    </div>
+                </div>
+                <div class="properyTable">
+                    <div class="propertyName">
+                        Количество батарей
+                    </div>
+                    <div class="propertyValue">
+                        @if(@Model.QuantityBattery == 0) {<span>Нет данных</span>}
+                        else {<span>@Model.QuantityBattery шт</span>}
+                    </div>
+                </div>
+                <div class="properyTable">
+                    <div class="propertyName">
+                        Максимальная рабочая глубина
+                    </div>
+                    <div class="propertyValue">
+                        @if(@Model.MaxGlubina == 0) {<span>Нет данных</span>}
+                        else {<span>@Model.MaxGlubina м</span>}
+                    </div>
+                </div>
+                <div class="headingFooter">
+                    @Html.ActionLink("Больше информации о товаре", "Details", new { id = Model.Id }, new { @class = "compItem" })
+                </div>
+            </div>
+            <div class="col-md-3 ml-auto">
+                <div class="row">
+                    <a class="price text-center" style="width:100%; margin-top:15px">@Html.DisplayFor(modelItem => Model.Price)<span> грн</span><span class="measure">/шт</span></a>
+                </div>
+                <div class="row">
+                    <div class="addCartmodal">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", Model.Id)
+                            @Html.Hidden("returnUrl", "/Fonari/List")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

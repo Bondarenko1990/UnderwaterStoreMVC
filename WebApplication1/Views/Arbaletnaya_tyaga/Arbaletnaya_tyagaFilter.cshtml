@@ -1,0 +1,207 @@
+﻿@using WebApplication1.Domain.Core
+@using WebApplication1.Models
+@model IndexView
+@{
+    Layout = null;
+    ViewBag.Title = "Арбалетные тяги";
+}
+<div id="results">
+    <div class="input">
+        <p>Розничная цена, грн</p>
+        <input type="hidden" value="@ViewBag.MinPrice" id="MinPrice" />
+        <input type="hidden" value="@ViewBag.MaxPrice" id="MaxPrice" />
+        <p>
+            <label for="amount">От</label>
+            <input type="text" id="false" name="MinPrice" value="@ViewBag.CheckedMinPrice" style="border: 1px solid #cccccc; color:#f6931f; font-weight:bold; width:80px;">
+            <label for="amount_1">До</label>
+            <input type="text" id="false" name="MaxPrice" value="@ViewBag.CheckedMaxPrice" style="border: 1px solid #cccccc; color:#f6931f; font-weight:bold; width:80px;">
+        </p>
+        <br />
+        <div id="slider-range" name="slider" style="width:70%;"></div>
+        <br />
+    </div>
+    <hr />
+    <div class="input">
+        <p>Производитель</p>
+        @foreach (var item in ViewBag.Brands)
+        {
+
+            var Flag = false;
+            <input type="checkbox" name="brand" id="false" value="@item"
+                   @foreach (var s in Model.Arbaletnaya_tyagas) { if (item == s.Brand.Name) { Flag = true; } }
+                   @if (ViewBag.CheckedBrand == 0) { @(Flag == false ? "disabled=\"disabled\"" : "") }
+                   @((Flag == true && ViewBag.CheckedBrand == 1) ? "checked=\"checked\"" : "")
+                   @if (ViewBag.CheckedCount > 1) { @(Flag == false ? "disabled=\"disabled\"" : "") } /> @item<br />
+
+            }
+    </div>
+    <hr />
+    <div class="input">
+        <p>Страна</p>
+
+        @foreach (var item in ViewBag.Countries)
+        {
+            var Country = false;
+            <input type="checkbox" name="country" id="false" value="@item"
+                   @foreach (var s in Model.Arbaletnaya_tyagas) { if (item == s.Brand.Country) { Country = true; } }
+                   @if (ViewBag.CheckedCountry == 0) { @(Country == false ? "disabled=\"disabled\"" : "") }
+                   @((Country == true && ViewBag.CheckedCountry == 1) ? "checked=\"checked\"" : "")
+                   @if (ViewBag.CheckedCount > 1) { @(Country == false ? "disabled=\"disabled\"" : "") } /> @item <br />
+
+            }
+    </div>
+    <hr />
+    <div class="input">
+        <p>Диаметр гарпуна, мм</p>
+
+        @foreach (var item in ViewBag.Diametr)
+        {
+            var Diametr = false;
+            <input type="checkbox" name="diametr" id="false" value="@item"
+                   @foreach (var s in Model.Arbaletnaya_tyagas) { if (item == s.Diametr) { Diametr = true; } }
+                   @if (ViewBag.CheckedDiametr == 0) { @(Diametr == false ? "disabled=\"disabled\"" : "") }
+                   @((Diametr == true && ViewBag.CheckedDiametr == 1) ? "checked=\"checked\"" : "")
+                   @if (ViewBag.CheckedCount > 1) { @(Diametr == false ? "disabled=\"disabled\"" : "") } /> @item <br />
+
+            }
+    </div>
+    <hr />
+
+    <div class="input">
+        <p>Тип</p>
+
+        @foreach (var item in ViewBag.Type)
+        {
+            var Type = false;
+            <input type="checkbox" name="type" id="false" value="@item"
+                   @foreach (var s in Model.Arbaletnaya_tyagas) { if (item == s.Type) { Type = true; } }
+                   @if (ViewBag.CheckedType == 0) { @(Type == false ? "disabled=\"disabled\"" : "") }
+                   @((Type == true && ViewBag.CheckedType == 1) ? "checked=\"checked\"" : "")
+                   @if (ViewBag.CheckedCount > 1) { @(Type == false ? "disabled=\"disabled\"" : "") } /> @item <br />
+
+            }
+    </div>
+    <hr />
+
+</div>
+
+<script type="text/javascript">
+    jQuery("#slider-range").slider({
+        stop: function (event, ui) {
+            myFunction();
+        }
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        var MinPrice = parseInt($("#MinPrice").val());
+        var MaxPrice = parseInt($("#MaxPrice").val());
+        var CheckedMinPrice = parseInt($('input[name="MinPrice"]').val());
+        var CheckedMaxPrice = parseInt($('input[name="MaxPrice"]').val());
+        $("#slider-range").slider({
+            step: 1,
+            range: true,
+            min: MinPrice,
+            max: MaxPrice,
+            values: [CheckedMinPrice, CheckedMaxPrice],
+            slide: function (event, ui) {
+                $('input[name="MinPrice"]').val(ui.values[0]);
+                $('input[name="MaxPrice"]').val(ui.values[1]);
+            }
+        });
+        $('input[name="MinPrice"]').val($("#slider-range").slider("values", 0));
+        $('input[name="MaxPrice"]').val($("#slider-range").slider("values", 1));
+        $('input[name="MinPrice"]').change(function () {
+            var value1 = $('input[name="MinPrice"]').val();
+            var value2 = $('input[name="MaxPrice"]').val();
+            if (parseInt(value1) > parseInt(value2)) {
+                value1 = value2;
+                $('input[name="MinPrice"]').val(value1);
+            }
+            $("#slider-range").slider("values", 0, value1);
+            myFunction();
+        });
+
+        $('input[name="MaxPrice"]').change(function () {
+            var value1 = $('input[name="MinPrice"]').val();
+            var value2 = $('input[name="MaxPrice"]').val();
+            if (parseInt(value1) > parseInt(value2)) {
+                value2 = value1;
+                $('input[name="MinPrice"]').val(value2);
+            }
+            $("#slider-range").slider("values", 1, value2);
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("input#false").change(function () {
+            myFunction();
+        });
+    });
+</script>
+<script>
+    function myFunction() {
+
+                var minPrice;
+                var maxPrice;
+                var brand1 = new Array();
+                var country1 = new Array();
+                var diametrGarpun1 = new Array();
+                var diametrTyagi1 = new Array();
+                var dopTyagi1 = new Array();
+                var sumTyagi1 = new Array();
+                var length1 = new Array();
+
+                minPrice = $('input[name="MinPrice"]').val();
+                maxPrice = $('input[name="MaxPrice"]').val();
+
+                $("input[name=brand]:checked").each(function () {
+                    brand1.push($(this).val());
+                });
+
+                $("input[name=country]:checked").each(function () {
+                    country1.push($(this).val());
+                });
+
+                $("input[name=diametrGarpun]:checked").each(function () {
+                    diametrGarpun1.push($(this).val());
+                });
+
+                $("input[name=diametrTyagi]:checked").each(function () {
+                    diametrTyagi1.push($(this).val());
+                });
+
+                $("input[name=dopTyagi]:checked").each(function () {
+                    dopTyagi1.push($(this).val());
+                });
+
+                $("input[name=sumTyagi]:checked").each(function () {
+                    sumTyagi1.push($(this).val());
+                });
+
+                $("input[name=length]:checked").each(function () {
+                    length1.push($(this).val());
+                });
+
+                var dat = { MinPrice: minPrice, MaxPrice: maxPrice, brand: brand1, country: country1, diametrGarpun: diametrGarpun1, diametrTyagi: diametrTyagi1, dopTyagi: dopTyagi1, sumTyagi: sumTyagi1, length: length1 };
+
+                var url = "@Url.Action("Arbaletnaya_tyagaFilter", "Arbaletnaya_tyaga")";
+                $("#results").load(url, dat, function () {
+                    CounFunction();
+                });
+                function CounFunction() {
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: "/Arbaletnaya_tyaga/Arbaletnaya_tyagaCount",
+                        traditional: true,
+                        data: dat,
+                        success: function (data) {
+                            $("#submit").val("Показать(" + data + ")");
+                        },
+                    })
+                }
+        }
+</script>

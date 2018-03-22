@@ -1,0 +1,128 @@
+﻿@using WebApplication1.Models
+@model IndexView
+@{
+    Layout = "~/Views/Shared/_Product.cshtml";
+    ViewBag.Title = "Акции";
+}
+<div id="modDialog" class="modal fade bd-example-modal-lg">
+    <div id="dialogContent" class="modal-dialog modal-dialog-centered"></div>
+</div>
+
+<div class="razdel">
+    <h3>Забирай комплект по цене ружья Pelengas</h3>
+</div>
+<div class="row">
+    <div class="col-xl-6 col-lg-6 m-x-auto">
+        <div class="akcii">
+            <div id="foto">
+                <img class="d-block img-fluid" src="~/Images/akcii1.jpg" />
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="razdel">
+    <h4>Подарок к твоему ружью</h4>
+</div>
+<div class="menu_items">
+    <div class="row">
+        @foreach (var s in Model.Chekhly_setkis)
+        {
+            <div class="tabloid-item col-xl-2 col-lg-4 col-md-6 col-sm-6">
+                <div class="picture">
+                    @if (s.ImageData != null)
+                    {
+                        <img src="@Url.Action("GetImage", "Chekhly_setki", new { s.Id })" />
+                    }
+                    @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Chekhly_setki", new { id = s.Id }, new { @class = "getFastView" })
+                    @Html.Hidden("RedirectTo", Url.Action("Details", "Chekhly_setki", new { id = s.Id }))
+                </div>
+                <a class="name" href="@Url.Action("Details", "Chekhly_setki", new { id = s.Id })"><span class="middle">@Html.DisplayFor(modelItem => s.Name)</span></a>
+                <a class="price">@Html.DisplayFor(modelItem => s.Price)<span> грн</span><span class="measure">/шт</span></a>
+                <div class="addCart">
+                    @using (Html.BeginForm("AddToCart", "Cart"))
+                    {
+                        @Html.Hidden("returnId", s.Id)
+                        @Html.Hidden("returnUrl", "/Home/Akciya2")
+                        <input id="cart" type="submit" value="В корзину" />
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<br />
+<div class="razdel">
+    <h4>Выбери себе ружье</h4>
+</div>
+
+<div class="menu_items">
+    <div class="row">
+        @foreach (var s in Model.Pneumatics)
+        {
+            <div class="tabloid-item col-xl-2 col-lg-4 col-md-6 col-sm-6">
+                <div class="picture">
+                    @if (s.ImageData != null)
+                    {
+                        <img src="@Url.Action("GetImage", "Pneumatic", new { s.Id })" />
+                    }
+                    @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Pneumatic", new { id = s.Id }, new { @class = "getFastView" })
+                    @Html.Hidden("RedirectTo", Url.Action("Details", "Pneumatic", new { id = s.Id }))
+                </div>
+                <a class="name" href="@Url.Action("Details", "Pneumatic", new { id = s.Id })"><span class="middle">@Html.DisplayFor(modelItem => s.Name)</span></a>
+                <a class="price">@Html.DisplayFor(modelItem => s.Price)<span> грн</span><span class="measure">/шт</span></a>
+                <div class="addCart">
+                    @using (Html.BeginForm("AddToCart", "Cart"))
+                    {
+                        @Html.Hidden("returnId", s.Id)
+                        @Html.Hidden("returnUrl", "/Home/Akciya2")
+                        <input id="cart" type="submit" value="В корзину" />
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<br />
+<h4>Условия акции</h4>
+<h5>Чтобы получить скидку, положите ружьё и сумку в корзину и оформите заказ. </h5>
+<p>Экономь бюджет!</p>
+<p>Получай отличный комплект!</p>
+<p>Добывай желанные трофеи с комфортом!</p>
+<script type="text/javascript">
+    $(function () {
+        $(".tabloid-item").mouseover(function () {
+            $(this).children(".addCart").css("display", "block");
+            $(this).css("margin-bottom", "-70px");
+            $(this).css("z-index", "100");
+            $(this).css("background-color", "white");
+        });
+        $(".tabloid-item").mouseout(function () {
+            $(this).children(".addCart").css("display", "none");
+            $(this).css("margin-bottom", "0");
+            $(this).css("z-index", "0");
+        });
+    });
+</script>
+<script type="text/javascript">
+
+    $(function () {
+        $.ajaxSetup({ cache: false });
+        $(".getFastView").click(function (e) {
+
+            e.preventDefault();
+            $.get(this.href, function (data) {
+                $('#dialogContent').html(data);
+                $('#modDialog').modal('show');
+            });
+        });
+    })
+</script>
+<script type="text/javascript">
+    $(function () {
+        $(".picture").on('click', ':not(a.getFastView)', function () {
+            var url = $(this).parent().children("#RedirectTo").val();
+            window.location.href = url;
+        });
+    });
+</script>

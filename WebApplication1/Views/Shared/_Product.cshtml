@@ -1,0 +1,284 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/scripts/jquery-3.3.1.js")
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+    <link href="~/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
+    <link rel="shortcut icon" href="~/Images/hunter.jpg" type="image/x-icon">
+</head>
+<body>
+
+    <div class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+        @Html.ActionLink("Главная", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    @Html.ActionLink("Акции", "Promo", "Home", new { area = "" }, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Оплата и Доставка", "Delivery", "Home", new { area = "" }, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Гарантия", "Guaranty", "Home", new { area = "" }, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Статьи и обзоры", "CatalogInfo", "Home", new { area = "" }, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Контакты", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })
+                </li>
+            </ul>
+            <form class="form-inline" action="/action_page.php">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                <button class="btn btn-success" type="submit">Search</button>
+            </form>
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+    <div class="container-fluid body-content">
+        <button onclick="topFunction()" id="myBtn" title="Go to top"><span class="oi oi-arrow-circle-top"></span></button>
+        <div class="row">
+            <div class="head col-xl-8 col-md-8 col-sm-12">
+
+                <div class="img_prozrak">
+                    <img src="~/Images/hunter.jpg">
+                </div>
+                <div class="call">
+                    <div class="mts">
+                        <a href="#">
+                            <img src="~/Images/mts.jpg">
+                            <span>+38(050)7000002</span>
+                        </a>
+                    </div>
+                    <div class="life">
+                        <a href="#">
+                            <img src="~/Images/life.jpg">
+                            <span>+38(063)7000002</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-4 korzina-block">
+                <div class="korzina">
+                    @Html.Action("Summary", "Cart")
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="row">
+                    <div class="nav-catalog">
+                        <nav class="navbar navbar-dark">
+                            @Html.ActionLink("Каталог товаров", "Catalog", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                            <button class="navbar-toggler btn_collapse float-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+
+                            <div class="navbar-collapse slider_collapse collapse" id="navbarNavDropdown">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Гидрокостюмы</a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                            <li>@Html.ActionLink("Штаны и Куртки", "List", "Shtany_i_kurtki", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Для подводной охоты", "List", "Dlya_podvodnoy_okhoty", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Для дайвинга и водного спорта", "List", "Dlya_dayvinga_i_vodnogo_sporta", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Футболки и шорты для водного спорта", "List", "Futbolki_i_shorty_dlya_vodnogo_sporta", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Сухие", "List", "Sukhie", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Аксессуары", "Aksessuary_k_gidrokostymam", "Aksessuary", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ружья</a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                            <li>@Html.ActionLink("Пневматика", "List", "Pneumatic", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Арбалеты", "Arbalet", "Arbalet", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Аксессуары к ружьям", "Aksessuary_k_ruzhyam", "Aksessuary", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ласты,Маски,Трубки</a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                            <li>@Html.ActionLink("Маски", "List", "Maski", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Трубки", "List", "Trubki", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Ласты для охоты", "List", "Lasty_dlya_okhoty", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Ласты для дайвинга", "List", "Lasty_dlya_dayvinga", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Комплекты", "List", "Komplekty", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Аксессуары", "Aksessuary_k_lasti_maski_trubki", "Aksessuary", new { area = "" }, new { @class = "dropdown-item" })</li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Носки,Боты,Перчатки</a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                            <li>@Html.ActionLink("Перчатки", "List", "Perchatki", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Носки", "List", "Noski", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Рукавицы", "List", "Rukavitsy", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Боты", "List", "Boty", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Тапочки", "List", "Tapochki", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ножи,Фонари,Груза</a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                            <li>@Html.ActionLink("Фонари", "List", "Fonari", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Ножи", "List", "Nozhi", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Груза и Грузовые системы", "List", "Gruza_i_gruzovye_sistemy", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Аксессуары", "Aksessuary_k_nozhi_fonari_gruza", "Aksessuary", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Дополнительно</a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                            <li>@Html.ActionLink("Куканы", "List", "Kukany", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Буи и аксессуары", "List", "Bui_i_aksessuary", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Химические средства и масла", "List", "Khimicheskie_sredstva_i_masla", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Катушки ходовые", "List", "Katushki_khodovye", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Чехлы,сетки", "List", "Chekhly_setki", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Муляжи", "List", "Mulyazhi", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("Полезные аксессуары", "List", "Poleznye_aksessuary", new { area = "" }, new { @class = "dropdown-item" })</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="SideBlock">
+                        <a class="heading" href=#>Новости</a>
+                        <div class="SideBlockContent">
+                            <div class="item">
+                                <div class="picBlock">
+                                    <a href="#">
+                                        <img src="~/Images/Clock_Holidays_Christmas.jpg" />
+                                    </a>
+                                </div>
+                                <div class="tools">
+                                    <a class="name" href="#">График работы в праздничные дни</a>
+                                    <div class="description">
+                                        <b>Выходные дни:</b><br>
+                                        31.12.2017<br>
+                                        01.01.2018<br>
+                                        02.01.2018<br>
+                                        06.01.2017<br>
+                                        07.01.2017<br>
+                                        08.01.2017<br>
+                                        <br>
+                                        <b>Рабочие дни</b><br>
+                                        30.12.2017<br>
+                                        03.01.2018<br>
+                                        04.01.2018<br>
+                                        05.01.2018<br>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="picBlock">
+                                    <a href="#">
+                                        <img src="~/Images/winter_cool.jpg" />
+                                    </a>
+                                </div>
+                                <div class="tools">
+                                    <a class="name" href="#">Синоптики обещают самую холодную зиму за 100 лет</a>
+                                    <div class="description">
+                                        За три месяца, по данным метеорологов, выпадет минимум один метр снега.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="heading" href=#>Бесплатная доставка</a>
+                        <div class="SideBlockContent text-center">
+                            <span>
+                                По Харькову от 1 000 грн
+                                <br />
+                                По Украине от 2 000 грн
+                            </span>
+                            <br />
+                            @Html.ActionLink("подробнее", "Delivery", "Home", new { area = "" }, null)
+                        </div>
+                        <a class="heading" href=#>Рассрочка</a>
+                        <div class="SideBlockContent text-center">
+                            <span>
+                                По заказам от 1 000 грн
+                                <br />
+                                Не выходя из дома
+                            </span>
+                            <br />
+                            @Html.ActionLink("подробнее", "Rassrochka", "Home", new { area = "" }, null)
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xl-9 col-lg-8 col-md-6">
+                @RenderBody()
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-8 col-md-10 col-sm-11 d-none d-sm-block">
+                @RenderSection("Footer", false)
+            </div>
+        </div>
+        <footer>
+            <nav class="navbar navbar-expand bg-dark navbar-dark fixed-bottom">
+                <div class="container-fluid ">
+                    <div class="navbar-collapse collapse">
+                        <ul class="navbar-nav">
+                            <li class="nav-item phone">
+                                <a class="phone nav-link" href="@Url.Action("Contact", "Home", null)"><span class="oi oi-phone"></span> ОБРАТНАЯ СВЯЗЬ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-none d-md-block" href="#">+38(050)7000002</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-none d-md-block" href="#">+38(063)7000002</a>
+                            </li>
+                        </ul>
+                        <span class="surname ml-auto"><b>&copy; 2018&nbsp;&nbsp;&nbsp;Bondarenko Sergey</b></span>
+                    </div>
+                </div>
+            </nav>
+        </footer>
+    </div>
+    <script>
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                document.getElementById("myBtn").style.display = "block";
+            }
+            else {
+                document.getElementById("myBtn").style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/jquery")*@
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

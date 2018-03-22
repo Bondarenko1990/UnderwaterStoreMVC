@@ -1,0 +1,144 @@
+﻿@using WebApplication1.Models
+@model IndexView
+@{
+    ViewBag.Title = "Новинка";
+}
+
+<h3>Новинка</h3>
+<br />
+
+<div id="modDialog" class="modal fade bd-example-modal-lg">
+    <div id="dialogContent" class="modal-dialog modal-dialog-centered"></div>
+</div>
+
+<div class="menu_items">
+    <div class="row">
+        <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+            <div class="marker">
+                Новинка
+            </div>
+            <div class="picture">
+                @{
+                    var pnevmatica = Model.Pneumatics.FirstOrDefault(p => p.Name == "PELENGAS Ружье подводное Z-linka 55 со смещенной рукояткой");
+                }
+                @if (pnevmatica.ImageData != null)
+                {
+                    <img src="@Url.Action("GetImage", "Pneumatic", new { pnevmatica.Id })" />
+                }
+                @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Pneumatic", new { id = pnevmatica.Id }, new { @class = "getFastView" })
+                @Html.Hidden("RedirectTo", Url.Action("Details", "Pneumatic", new { id = pnevmatica.Id }))
+            </div>
+            <a class="name" href="@Url.Action("Details", "Pneumatic", new { id = pnevmatica.Id })"><span class="middle">@Html.DisplayFor(modelItem => pnevmatica.Name)</span></a>
+            <a class="price">@Html.DisplayFor(modelItem => pnevmatica.Price)<span> грн</span><span class="measure">/шт</span></a>
+            <div class="addCart">
+                @using (Html.BeginForm("AddToCart", "Cart"))
+                {
+                    @Html.Hidden("returnId", pnevmatica.Id)
+                    @Html.Hidden("returnUrl", "/Home/Index")
+                    <input id="cart" type="submit" value="В корзину" />
+                }
+            </div>
+        </div>
+        <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+            <div class="marker">
+                Новинка
+            </div>
+            <div class="picture">
+                @{
+                    var maska = Model.Maskis.FirstOrDefault(p => p.Name == "MARLIN Hunter Black просветленные стекла");
+                }
+                @if (maska.ImageData != null)
+                {
+                    <img src="@Url.Action("GetImage", "Maski", new { maska.Id })" />
+                }
+                @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Maski", new { id = maska.Id }, new { @class = "getFastView" })
+                @Html.Hidden("RedirectTo", Url.Action("Details", "Maski", new { id = maska.Id }))
+            </div>
+            <a class="name" href="@Url.Action("Details", "Maski", new { id = maska.Id })"><span class="middle">@Html.DisplayFor(modelItem => maska.Name)</span></a>
+            <a class="price">@Html.DisplayFor(modelItem => maska.Price)<span> грн</span><span class="measure">/шт</span></a>
+            <div class="addCart">
+                @using (Html.BeginForm("AddToCart", "Cart"))
+                {
+                    @Html.Hidden("returnId", maska.Id)
+                    @Html.Hidden("returnUrl", "/Home/Index")
+                    <input id="cart" type="submit" value="В корзину" />
+                }
+            </div>
+        </div>
+        <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+            <div class="marker">
+                Новинка
+            </div>
+            <div class="picture">
+                @{
+                    var dly_ohoti = Model.Dlya_podvodnoy_okhotys.FirstOrDefault(p => p.Name == "MARLIN Sarmat черный 5 мм");
+                }
+                @if (dly_ohoti.ImageData != null)
+                {
+                    <img src="@Url.Action("GetImage", "Dlya_podvodnoy_okhoty", new { dly_ohoti.Id })" />
+                }
+                @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Dlya_podvodnoy_okhoty", new { id = dly_ohoti.Id }, new { @class = "getFastView" })
+                @Html.Hidden("RedirectTo", Url.Action("Details", "Dlya_podvodnoy_okhoty", new { id = dly_ohoti.Id }))
+            </div>
+            <a class="name" href="@Url.Action("Details", "Dlya_podvodnoy_okhoty", new { id = dly_ohoti.Id })"><span class="middle">@Html.DisplayFor(modelItem => dly_ohoti.Name)</span></a>
+            <a class="price">@Html.DisplayFor(modelItem => dly_ohoti.Price)<span> грн</span><span class="measure">/шт</span></a>
+            <div class="addCart">
+                @using (Html.BeginForm("AddToCart", "Cart"))
+                {
+                    @Html.Hidden("returnId", dly_ohoti.Id)
+                    @Html.Hidden("returnUrl", "/Home/Index")
+                    <input id="cart" type="submit" value="В корзину" />
+                }
+            </div>
+        </div>
+        <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+            <div class="marker">
+                Новинка
+            </div>
+            <div class="picture">
+                @{
+                    var nozh = Model.Nozhis.FirstOrDefault(p => p.Name == "PELENGAS Нож с магнитным креплением Volga");
+                }
+                @if (nozh.ImageData != null)
+                {
+                    <img src="@Url.Action("GetImage", "Nozhi", new { nozh.Id })" />
+                }
+                @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Nozhi", new { id = nozh.Id }, new { @class = "getFastView" })
+                @Html.Hidden("RedirectTo", Url.Action("Details", "Nozhi", new { id = nozh.Id }))
+            </div>
+            <a class="name" href="@Url.Action("Details", "Nozhi", new { id = nozh.Id })"><span class="middle">@Html.DisplayFor(modelItem => nozh.Name)</span></a>
+            <a class="price">@Html.DisplayFor(modelItem => nozh.Price)<span> грн</span><span class="measure">/шт</span></a>
+            <div class="addCart">
+                @using (Html.BeginForm("AddToCart", "Cart"))
+                {
+                    @Html.Hidden("returnId", nozh.Id)
+                    @Html.Hidden("returnUrl", "/Home/Index")
+                    <input id="cart" type="submit" value="В корзину" />
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $(".getFastView").click(function (e) {
+
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+        })
+</script>
+<script type="text/javascript">
+        $(function () {
+            $(".picture").on('click', ':not(a.getFastView)', function () {
+                var url = $(this).parent().children("#RedirectTo").val();
+                window.location.href = url;
+            });
+        });
+</script>

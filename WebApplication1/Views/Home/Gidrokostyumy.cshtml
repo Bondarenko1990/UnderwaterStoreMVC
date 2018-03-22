@@ -1,0 +1,84 @@
+﻿@using WebApplication1.Domain.Core
+@using WebApplication1.Models
+@using WebApplication1.Helpers
+@model IndexView
+
+@{
+    Layout = "~/Views/Shared/_Product.cshtml";
+    ViewBag.Title = "Гидрокостюмы";
+}
+
+<div class="bread">
+    <nav class="breadcrumb">
+        @Html.ActionLink("Главная", "Index", "Home", new { area = "" }, new { @class = "breadcrumb-item" })
+        @Html.ActionLink("Каталог товаров", "Catalog", "Home", new { area = "" }, new { @class = "breadcrumb-item" })
+        <span class="breadcrumb-item active">Гидрокостюмы</span>
+    </nav>
+</div>
+<div class="razdel">
+    <h3>Гидрокостюмы</h3>
+</div>
+
+<div class="row">
+    <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+        <a class="picture" href="@Url.Action("List", "Dlya_podvodnoy_okhoty", null)">
+            <img src="~/Images/dlya_podvodnoi_ohoti.jpg" />
+        </a>
+        <a class="name text-center" href="@Url.Action("List", "Dlya_podvodnoy_okhoty", null)"><span class="middle">Для подводной охоты</span></a>
+    </div>
+    <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+        <a class="picture" href="@Url.Action("List", "Dlya_dayvinga_i_vodnogo_sporta", null)">
+            <img src="~/Images/dlya_dayvinga_i_vodnogo_sporta.jpg" />
+        </a>
+        <a class="name text-center" href="@Url.Action("List", "Dlya_dayvinga_i_vodnogo_sporta", null)"><span class="middle">Для дайвинга и водного спорта</span></a>
+    </div>
+    <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+        <a class="picture" href="@Url.Action("List", "Futbolki_i_shorty_dlya_vodnogo_sporta", null)">
+            <img src="~/Images/futbolki_i_shorty_dlya_vodnogo_sporta.jpg" />
+        </a>
+        <a class="name text-center" href="@Url.Action("List", "Futbolki_i_shorty_dlya_vodnogo_sporta", null)"><span class="middle">Футболки и шорты для водного спорта</span></a>
+    </div>
+    <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+        <a class="picture" href="@Url.Action("List", "Sukhie", null)">
+            <img src="~/Images/sukhie.jpg" />
+        </a>
+        <a class="name text-center" href="@Url.Action("List", "Sukhie", null)"><span class="middle">Сухие</span></a>
+    </div>
+    <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+        <a class="picture" href="@Url.Action("List", "Shtany_i_kurtki", null)">
+            <img src="~/Images/shtany_i_kurtki.jpg" />
+        </a>
+        <a class="name text-center" href="@Url.Action("List", "Shtany_i_kurtki", null)"><span class="middle">Штаны и куртки</span></a>
+    </div>
+    <div class="tabloid-item col-xl-3 col-lg-4 col-md-6 col-sm-6">
+        <a class="picture" href="@Url.Action("Aksessuary_k_gidrokostymam", "Aksessuary", null)">
+            <img src="~/Images/aksessuary_gidrokostymy.jpg" />
+        </a>
+        <a class="name text-center" href="@Url.Action("Aksessuary_k_gidrokostymam", "Aksessuary", null)"><span class="middle">Аксессуары</span></a>
+    </div>
+</div>
+
+
+<p class="text">Делаем отправки во все города Украины:  Киев, Харьков, Днепропетровск, Черкассы, Запорожье, Винница, Кировоград, Полтава, Луганск, Ровно, Херсон, Донецк, Луцк, Симферополь, Хмельницкий, Житомир, Львов, Сумы,  Николаев, Тернополь, Чернигов, Ивано-Франковск, Одесса, Ужгород, Черновцы и другие.	</p>
+
+@section Scripts{
+
+
+    <script>
+        $('.dropdown-menu > .dropdown > a').addClass('dropdown-toggle');
+
+        $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
+            if (!$(this).next().hasClass('show')) {
+                $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+            }
+            var $subMenu = $(this).next(".dropdown-menu");
+            $subMenu.toggleClass('show');
+            $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
+                $('.dropdown-menu > .dropdown .show').removeClass("show");
+            });
+            return false;
+        });
+    </script>
+}
+
+

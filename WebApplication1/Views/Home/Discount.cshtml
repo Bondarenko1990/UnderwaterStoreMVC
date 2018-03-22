@@ -1,0 +1,144 @@
+﻿@using WebApplication1.Models
+@model IndexView
+@{
+    ViewBag.Title = "Обвал цен";
+}
+
+<h3>Обвал цен</h3>
+<br />
+
+<div id="modDialog" class="modal fade bd-example-modal-lg">
+    <div id="dialogContent" class="modal-dialog modal-dialog-centered"></div>
+</div>
+
+<div class="menu_items">
+    <div class="row">
+        <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Обвал цен
+                    </div>
+                    <div class="picture">
+                        @{
+                            var garpun = Model.Garpuns.FirstOrDefault(p => p.Name == "SEAC SUB Гарпун к Asso 75");
+                        }
+                        @if (garpun.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Garpun", new { garpun.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Garpun", new { id = garpun.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Garpun", new { id = garpun.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Garpun", new { id = garpun.Id })"><span class="middle">@Html.DisplayFor(modelItem => garpun.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => garpun.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", garpun.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Обвал цен
+                    </div>
+                    <div class="picture">
+                        @{
+                            var aksessuary_k_lastam = Model.Aksessuary_k_lastams.FirstOrDefault(p => p.Name == "BEUCHAT Пряжка к ластам X-Jet");
+                        }
+                        @if (aksessuary_k_lastam.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Aksessuary_k_lastam", new { aksessuary_k_lastam.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Aksessuary_k_lastam", new { id = aksessuary_k_lastam.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Aksessuary_k_lastam", new { id = aksessuary_k_lastam.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Aksessuary_k_lastam", new { id = aksessuary_k_lastam.Id })"><span class="middle">@Html.DisplayFor(modelItem => aksessuary_k_lastam.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => aksessuary_k_lastam.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", aksessuary_k_lastam.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Обвал цен
+                    </div>
+                    <div class="picture">
+                        @{
+                            var dly_daivinga = Model.Dlya_dayvinga_i_vodnogo_sportas.FirstOrDefault(p => p.Name == "CRESSI Lui 2.5 mm");
+                        }
+                        @if (dly_daivinga.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Dlya_dayvinga_i_vodnogo_sporta", new { dly_daivinga.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Dlya_dayvinga_i_vodnogo_sporta", new { id = dly_daivinga.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Dlya_dayvinga_i_vodnogo_sporta", new { id = dly_daivinga.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Dlya_dayvinga_i_vodnogo_sporta", new { id = dly_daivinga.Id })"><span class="middle">@Html.DisplayFor(modelItem => dly_daivinga.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => dly_daivinga.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", dly_daivinga.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Обвал цен
+                    </div>
+                    <div class="picture">
+                        @{
+                            var pnevmatica = Model.Pneumatics.FirstOrDefault(p => p.Name == "CRESSI SL/Star 55");
+                        }
+                        @if (pnevmatica.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Pneumatic", new { pnevmatica.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Pneumatic", new { id = pnevmatica.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Pneumatic", new { id = pnevmatica.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Pneumatic", new { id = pnevmatica.Id })"><span class="middle">@Html.DisplayFor(modelItem => pnevmatica.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => pnevmatica.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", pnevmatica.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $(".getFastView").click(function (e) {
+
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+        })
+</script>
+<script type="text/javascript">
+        $(function () {
+            $(".picture").on('click', ':not(a.getFastView)', function () {
+                var url = $(this).parent().children("#RedirectTo").val();
+                window.location.href = url;
+            });
+        });
+</script>

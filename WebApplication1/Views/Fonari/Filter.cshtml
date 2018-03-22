@@ -1,0 +1,295 @@
+﻿@using WebApplication1.Domain.Core
+@using WebApplication1.Models
+@model IndexView
+@{
+    Layout = null;
+    ViewBag.Title = "Фонари";
+}
+<div id="results">
+    <div class="input">
+        <p>Розничная цена, грн</p>
+        <input type="hidden" value="@ViewBag.MinPrice" id="MinPrice" />
+        <input type="hidden" value="@ViewBag.MaxPrice" id="MaxPrice" />
+        <p>
+            <label for="amount">От</label>
+            <input type="text" id="false" name="MinPrice" value="@ViewBag.CheckedMinPrice" style="border: 1px solid #cccccc; color:#f6931f; font-weight:bold; width:80px;">
+            <label for="amount_1">До</label>
+            <input type="text" id="false" name="MaxPrice" value="@ViewBag.CheckedMaxPrice" style="border: 1px solid #cccccc; color:#f6931f; font-weight:bold; width:80px;">
+        </p>
+        <br />
+        <div id="slider-range" name="slider" style="width:70%;"></div>
+        <br />
+    </div>
+    <hr />
+    <div class="input">
+        <p>Производитель</p>
+        @foreach (var item in ViewBag.Brands)
+        {
+
+            var Flag = false;
+            <input type="checkbox" name="brand" id="false" value="@item"
+                   @foreach (var s in Model.Fonaris) { if (item == s.Brand.Name) { Flag = true; } }
+                   @if (ViewBag.CheckedBrand == 0) { @(Flag == false ? "disabled=\"disabled\"" : "") }
+                   @((Flag == true && ViewBag.CheckedBrand == 1) ? "checked=\"checked\"" : "")
+                   @if (ViewBag.CheckedCount > 1) { @(Flag == false ? "disabled=\"disabled\"" : "") } /> @item<br />
+
+            }
+    </div>
+    <hr />
+    <div class="input">
+        <p>Страна</p>
+
+        @foreach (var item in ViewBag.Countries)
+        {
+            var Flag = false;
+            <input type="checkbox" name="country" id="false" value="@item"
+                   @foreach (var s in Model.Fonaris) { if (item == s.Brand.Country) { Flag = true; } }
+                   @if (ViewBag.CheckedCountry == 0) { @(Flag == false ? "disabled=\"disabled\"" : "") }
+                   @((Flag == true && ViewBag.CheckedCountry == 1) ? "checked=\"checked\"" : "")
+                   @if (ViewBag.CheckedCount > 1) { @(Flag == false ? "disabled=\"disabled\"" : "") } /> @item <br />
+
+            }
+    </div>
+    <hr />
+    <div class="input">
+        <p>Тип лампы</p>
+
+        @foreach (var item in ViewBag.TypeLamp)
+        {
+            var Flag = false;
+            <input type="checkbox" name="typelamp" id="false" value="@item"
+                   @foreach (var s in Model.Fonaris) { if (item == s.TypeLamp) { Flag = true; } }
+                   @if (ViewBag.CheckedTypeLamp == 0) { @(Flag == false ? "disabled=\"disabled\"" : "") }
+                   @((Flag == true && ViewBag.CheckedTypeLamp == 1) ? "checked=\"checked\"" : "")
+                   @if (ViewBag.CheckedCount > 1) { @(Flag == false ? "disabled=\"disabled\"" : "") } /> @item <br />
+
+            }
+    </div>
+    <hr />
+    <div class="input">
+        <p>Тип батареи</p>
+
+        @foreach (var item in ViewBag.TypeBattery)
+        {
+            var Flag = false;
+            <input type="checkbox" name="typebattery" id="false" value="@item"
+                   @foreach (var s in Model.Fonaris) { if (item == s.TypeBattery) { Flag = true; } }
+                   @if (ViewBag.CheckedTypeBattery == 0) { @(Flag == false ? "disabled=\"disabled\"" : "") }
+                   @((Flag == true && ViewBag.CheckedTypeBattery == 1) ? "checked=\"checked\"" : "")
+                   @if (ViewBag.CheckedCount > 1) { @(Flag == false ? "disabled=\"disabled\"" : "") } /> @item <br />
+
+            }
+    </div>
+    <hr />   
+    <div class="input">
+        <p>Световой поток, люмен</p>
+
+        @foreach (int[] item in ViewBag.Svet)
+        {
+            var Flag = false;
+            var ItemEdit = "";
+            if (item[0] == 0 && item[1] == 0)
+            { ItemEdit = "Нет данных"; }
+            else
+            { ItemEdit = item[0] + "-" + item[1]; }
+            <input type="checkbox" name="svet" id="false" value="@item[0]-@item[1]"
+                   @foreach (var s in Model.Fonaris) { if (s.Svet >= item[0] && s.Svet < item[1] && s.Svet != 0 || s.Svet == item[0] && s.Svet == item[1]) { Flag = true; } }
+                   @if (ViewBag.CheckedSvet == 0) { @(Flag == false ? "disabled=\"disabled\"" : "") }
+                   @((Flag == true && ViewBag.CheckedSvet == 1) ? "checked=\"checked\"" : "")
+                   @if (ViewBag.CheckedCount > 1) { @(Flag == false ? "disabled=\"disabled\"" : "") } /> @ItemEdit<br />
+            }
+    </div>
+    <hr />
+    <div class="input">
+        <p>Время работы, часов</p>
+
+        @foreach (int[] item in ViewBag.TimeWork)
+        {
+            var Flag = false;
+            var ItemEdit = "";
+            if (item[0] == 0 && item[1] == 0)
+            { ItemEdit = "Нет данных"; }
+            else
+            { ItemEdit = item[0] + "-" + item[1]; }
+            <input type="checkbox" name="timework" id="false" value="@item[0]-@item[1]"
+                   @foreach (var s in Model.Fonaris) { if (s.TimeWork >= item[0] && s.TimeWork < item[1] && s.TimeWork != 0 || s.TimeWork == item[0] && s.TimeWork == item[1]) { Flag = true; } }
+                   @if (ViewBag.CheckedTimeWork == 0) { @(Flag == false ? "disabled=\"disabled\"" : "") }
+                   @((Flag == true && ViewBag.CheckedTimeWork == 1) ? "checked=\"checked\"" : "")
+                   @if (ViewBag.CheckedCount > 1) { @(Flag == false ? "disabled=\"disabled\"" : "") } /> @ItemEdit<br />
+            }
+    </div>
+    <hr />
+    <div class="input">
+        <p>Количество батарей, шт</p>
+
+        @foreach (int[] item in ViewBag.QuantityBattery)
+        {
+            var Flag = false;
+            var ItemEdit = "";
+            if (item[0] == 0 && item[1] == 0)
+            { ItemEdit = "Нет данных"; }
+            else
+            { ItemEdit = item[0] + "-" + item[1]; }
+            <input type="checkbox" name="quantitybattery" id="false" value="@item[0]-@item[1]"
+                   @foreach (var s in Model.Fonaris) { if (s.QuantityBattery >= item[0] && s.QuantityBattery < item[1] && s.QuantityBattery != 0 || s.QuantityBattery == item[0] && s.QuantityBattery == item[1]) { Flag = true; } }
+                   @if (ViewBag.CheckedQuantityBattery == 0) { @(Flag == false ? "disabled=\"disabled\"" : "") }
+                   @((Flag == true && ViewBag.CheckedQuantityBattery == 1) ? "checked=\"checked\"" : "")
+                   @if (ViewBag.CheckedCount > 1) { @(Flag == false ? "disabled=\"disabled\"" : "") } /> @ItemEdit<br />
+
+            }
+    </div>
+    <hr />
+    <div class="input">
+        <p>Максимальная рабочая глубина, м</p>
+
+       @foreach (int[] item in ViewBag.MaxGlubina)
+       {
+        var Flag = false;
+        var ItemEdit = "";
+        if (item[0] == 0 && item[1] == 0)
+        { ItemEdit = "Нет данных"; }
+        else
+        { ItemEdit = item[0] + "-" + item[1]; }
+        <input type="checkbox" name="maxglubina" id="false" value="@item[0]-@item[1]"
+               @foreach (var s in Model.Fonaris) { if (s.MaxGlubina >= item[0] && s.MaxGlubina < item[1] && s.MaxGlubina != 0 || s.MaxGlubina == item[0] && s.MaxGlubina == item[1]) { Flag = true; } }
+               @if (ViewBag.CheckedMaxGlubina == 0) { @(Flag == false ? "disabled=\"disabled\"" : "") }
+               @((Flag == true && ViewBag.CheckedMaxGlubina == 1) ? "checked=\"checked\"" : "")
+               @if (ViewBag.CheckedCount > 1) { @(Flag == false ? "disabled=\"disabled\"" : "") } /> @ItemEdit<br />
+
+       }
+    </div>
+    <hr />
+</div>
+
+<script type="text/javascript">
+    jQuery("#slider-range").slider({
+        stop: function (event, ui) {
+            myFunction();
+        }
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        var MinPrice = parseInt($("#MinPrice").val());
+        var MaxPrice = parseInt($("#MaxPrice").val());
+        var CheckedMinPrice = parseInt($('input[name="MinPrice"]').val());
+        var CheckedMaxPrice = parseInt($('input[name="MaxPrice"]').val());
+        $("#slider-range").slider({
+            step: 1,
+            range: true,
+            min: MinPrice,
+            max: MaxPrice,
+            values: [CheckedMinPrice, CheckedMaxPrice],
+            slide: function (event, ui) {
+                $('input[name="MinPrice"]').val(ui.values[0]);
+                $('input[name="MaxPrice"]').val(ui.values[1]);
+            }
+        });
+        $('input[name="MinPrice"]').val($("#slider-range").slider("values", 0));
+        $('input[name="MaxPrice"]').val($("#slider-range").slider("values", 1));
+        $('input[name="MinPrice"]').change(function () {
+            var value1 = $('input[name="MinPrice"]').val();
+            var value2 = $('input[name="MaxPrice"]').val();
+            if (parseInt(value1) > parseInt(value2)) {
+                value1 = value2;
+                $('input[name="MinPrice"]').val(value1);
+            }
+            $("#slider-range").slider("values", 0, value1);
+            myFunction();
+        });
+
+        $('input[name="MaxPrice"]').change(function () {
+            var value1 = $('input[name="MinPrice"]').val();
+            var value2 = $('input[name="MaxPrice"]').val();
+            if (parseInt(value1) > parseInt(value2)) {
+                value2 = value1;
+                $('input[name="MinPrice"]').val(value2);
+            }
+            $("#slider-range").slider("values", 1, value2);
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("input#false").change(function () {
+            myFunction();
+        });
+    });
+</script>
+<script>
+    function myFunction() {
+
+                var minPrice;
+                var maxPrice;
+                var brand1 = new Array();
+                var country1 = new Array();
+                var typelamp1 = new Array();
+                var typebattery1 = new Array();
+                var svet1 = new Array();
+                var timework1 = new Array();
+                var quantitybattery1 = new Array();
+                var maxglubina1 = new Array();
+
+                minPrice = $('input[name="MinPrice"]').val();
+                maxPrice = $('input[name="MaxPrice"]').val();
+
+                $("input[name=brand]:checked").each(function () {
+                    console.log(brand1[0]);
+                });
+
+                $("input[name=country]:checked").each(function () {
+                    country1.push($(this).val());
+                });
+
+                $("input[name=typelamp]:checked").each(function () {
+                    typelamp1.push($(this).val());
+                });
+
+                $("input[name=typebattery]:checked").each(function () {
+                    typebattery1.push($(this).val());
+                });
+
+                $("input[name=svet]:checked").each(function (index) {
+                    //svet1.push($(this).val());
+                    svet1[index] = $(this).val().split("-");
+                });
+
+                $("input[name=timework]:checked").each(function (index) {
+  
+                    timework1[index] = $(this).val().split("-");
+
+                    console.log(timework1[index]);
+                });
+
+                $("input[name= quantitybattery]:checked").each(function (index) {
+                    quantitybattery1[index] = $(this).val().split("-");
+                });
+
+                $("input[name=maxglubina]:checked").each(function (index) {
+                    maxglubina1[index] = $(this).val().split("-");
+                });
+
+                var dat = {
+                    MinPrice: minPrice, MaxPrice: maxPrice, brand: brand1, country: country1, typelamp: typelamp1, typebattery: typebattery1,
+                    svet: svet1, timework: timework1, quantitybattery: quantitybattery1, maxglubina: maxglubina1,};
+
+                var url = "@Url.Action("Filter", "Fonari")";
+                $("#results").load(url, dat, function () {
+                    CounFunction();
+                });
+                function CounFunction() {
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: "/Fonari/Count",
+                        traditional: true,
+                        data: dat,
+                        success: function (data) {
+                            $("#submit").val("Показать(" + data + ")");
+                        },
+                    })
+                }
+        }
+</script>
+

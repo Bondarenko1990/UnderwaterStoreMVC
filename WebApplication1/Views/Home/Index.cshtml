@@ -1,0 +1,1217 @@
+﻿@using WebApplication1.Models
+@model IndexView
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Прозрак";
+}
+
+<div id="modDialog" class="modal fade bd-example-modal-lg">
+    <div id="dialogContent" class="modal-dialog modal-dialog-centered"></div>
+</div>
+<div class="row">
+    <div class="col-xl-12 d-none d-md-block">
+        <div class="w3-content w3-section mx-auto" style="max-width:500px; height:350px;">
+            <img class="mySlides w3-animate-fading" src="~/Images/sudaka.jpg" style="width:auto;height:100%">
+            <img class="mySlides w3-animate-fading" src="~/Images/sudak2.jpg" style="width:auto;height:100%">
+            <img class="mySlides w3-animate-fading" src="~/Images/som2.jpg" style="width:auto;height:100%">
+            <img class="mySlides w3-animate-fading" src="~/Images/som1.jpg" style="width:auto;height:100%">
+            <img class="mySlides w3-animate-fading" src="~/Images/schuka1.jpg" style="width:auto;height:100%">
+            <img class="mySlides w3-animate-fading" src="~/Images/sazan1.jpg" style="width:auto;height:100%">
+        </div>
+    </div>
+</div>
+
+<div class="ramka">
+    <div class="row">
+        <div class="col-xl-4 col-lg-6 m-x-auto">
+            <div class="akcii">
+                <img class="d-block img-fluid" src="~/Images/skydkaNaSumku50.png">
+
+                <div id="foto">
+                    <img class="d-block img-fluid" src="~/Images/akcii2.jpg" />
+                </div>
+                <h5>Получи сумку за пол цены</h5>
+                 @using (Html.BeginForm("Akciya1", "Home", new { }))
+                    {
+                     <button class="btn btn-success" type="submit">Подробнее</button>
+                    }
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 m-x-auto">
+            <div class="akcii">
+                <img class="d-block img-fluid" src="~/Images/komplektPoCene.png">
+
+                <div id="foto">
+                    <img class="d-block img-fluid" src="~/Images/akcii1.jpg" />
+                </div>
+                <h5>Забирай комплект по цене ружья</h5>
+                @using (Html.BeginForm("Akciya2", "Home", new { }))
+                    {
+                     <button class="btn btn-success" type="submit">Подробнее</button>
+                    }
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 m-x-auto">
+            <div class="akcii">
+                <img class="d-block img-fluid" src="~/Images/komplektPoceneMaski.png">
+
+                <div id="foto">
+                    <img class="d-block img-fluid" src="~/Images/akcii3.jpg" />
+                </div>
+                <h5>Забирай комплект по цене маски</h5>
+                 @using (Html.BeginForm("Akciya3", "Home", new { }))
+                    {
+                     <button class="btn btn-success" type="submit">Подробнее</button>
+                    }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="shapka">
+    <div class="shapka-button row">
+        <button type="button" class="nazad"><span class="oi oi-caret-left"></span></button>
+        <button type="button" class="vpered"><span class="oi oi-caret-right"></span></button>
+    </div>
+    <ul class="nav nav-pills row">
+        <li class="nav-item col-xl-3 col-lg-6" id="nav-item1">
+            <a class="nav-link active" data-toggle="pill" href="#hit_prodazh">Хит продаж</a>
+        </li>
+        <li class="nav-item col-xl-3 col-lg-6">
+            <a class="nav-link" data-toggle="pill" href="#novinka">Новинка</a>
+        </li>
+        <li class="nav-item col-xl-3 col-lg-6">
+            <a class="nav-link" data-toggle="pill" href="#obval_cen">Обвал цен</a>
+        </li>
+        <li class="nav-item col-xl-3 col-lg-6">
+            <a class="nav-link" data-toggle="pill" href="#akciya">Акция</a>
+        </li>
+    </ul>
+</div>
+<!-- Tab panes -->
+<div class="tabloid">
+    <div class="tab-content">
+        <div class="tab-pane active container-fluid" id="hit_prodazh">
+            <div class="row">
+                <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Хит продаж
+                    </div>
+                    <div class="picture">
+                        @{
+                            var item = Model.Chekhly_setkis.FirstOrDefault(p => p.Name == "MARES Сумка Attack Titan");
+                        }
+                        @if (item.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Chekhly_setki", new { item.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Chekhly_setki", new { id = item.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Chekhly_setki", new { id = item.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Chekhly_setki", new { id = item.Id })"><span class="middle">@Html.DisplayFor(modelItem => item.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => item.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", item.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+
+                <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Хит продаж
+                    </div>
+                    <div class="picture">
+                        @{
+                           var fonar = Model.Fonaris.FirstOrDefault(p => p.Name == "FEREI W155 (жёлтый свет)");
+                        }
+                        @if (fonar.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Fonari", new { fonar.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Fonari", new { id = fonar.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Fonari", new { id = fonar.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Fonari", new { id = fonar.Id })"><span class="middle">@Html.DisplayFor(modelItem => fonar.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => fonar.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", fonar.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Хит продаж
+                    </div>
+                    <div class="picture">
+                        @{
+                           var trubka = Model.Trubkis.FirstOrDefault(p => p.Name == "CRESSI Corsica камуфляж");
+                        }
+                        @if (trubka.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Trubki", new { trubka.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Trubki", new { id = trubka.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Trubki", new { id = trubka.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Trubki", new { id = trubka.Id })"><span class="middle">@Html.DisplayFor(modelItem => trubka.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => trubka.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", trubka.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Хит продаж
+                    </div>
+                    <div class="picture">
+                        @{
+                           var rukavitsy = Model.Rukavitsys.FirstOrDefault(p => p.Name == "MARLIN Open Cell 3-х палые 5 мм");
+                        }
+                        @if (rukavitsy.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Rukavitsy", new { rukavitsy.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Rukavitsy", new { id = rukavitsy.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Rukavitsy", new { id = rukavitsy.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Rukavitsy", new { id = rukavitsy.Id })"><span class="middle">@Html.DisplayFor(modelItem => rukavitsy.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => rukavitsy.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", rukavitsy.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Хит продаж
+                    </div>
+                    <div class="picture">
+                        @{
+                           var komplekt = Model.Komplektys.FirstOrDefault(p => p.Name == "OMER Набор Eagleray+Alien+Zoom в чехле");
+                        }
+                        @if (komplekt.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Komplekty", new { komplekt.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Komplekty", new { id = komplekt.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Komplekty", new { id = komplekt.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Komplekty", new { id = komplekt.Id })"><span class="middle">@Html.DisplayFor(modelItem => komplekt.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => komplekt.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", komplekt.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Хит продаж
+                    </div>
+                    <div class="picture">
+                        @{
+                            fonar = Model.Fonaris.FirstOrDefault(p => p.Name == "SEAC SUB R20");
+                        }
+                        @if (fonar.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Fonari", new { fonar.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Fonari", new { id = fonar.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Fonari", new { id = fonar.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Fonari", new { id = fonar.Id })"><span class="middle">@Html.DisplayFor(modelItem => fonar.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => fonar.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", fonar.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Хит продаж
+                    </div>
+                    <div class="picture">
+                        @{
+                            var dly_ohoti = Model.Dlya_podvodnoy_okhotys.FirstOrDefault(p => p.Name == "CRESSI Tracina 9 мм");
+                        }
+                        @if (dly_ohoti.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Dlya_podvodnoy_okhoty", new { dly_ohoti.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Dlya_podvodnoy_okhoty", new { id = dly_ohoti.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Dlya_podvodnoy_okhoty", new { id = dly_ohoti.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Dlya_podvodnoy_okhoty", new { id = dly_ohoti.Id })"><span class="middle">@Html.DisplayFor(modelItem => dly_ohoti.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => dly_ohoti.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", dly_ohoti.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Хит продаж
+                    </div>
+                    <div class="picture">
+                        @{
+                            var lasti_ohota = Model.Lasty_dlya_okhotys.FirstOrDefault(p => p.Name == "OMER Eagleray");
+                        }
+                        @if (lasti_ohota.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Lasty_dlya_okhoty", new { lasti_ohota.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Lasty_dlya_okhoty", new { id = lasti_ohota.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Lasty_dlya_okhoty", new { id = lasti_ohota.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Lasty_dlya_okhoty", new { id = lasti_ohota.Id })"><span class="middle">@Html.DisplayFor(modelItem => lasti_ohota.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => lasti_ohota.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", lasti_ohota.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane container-fluid" id="novinka">
+            <div class="row">
+                <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Новинка
+                    </div>
+                    <div class="picture">
+                        @{
+                            var pnevmatica = Model.Pneumatics.FirstOrDefault(p => p.Name == "PELENGAS Ружье подводное Z-linka 55 со смещенной рукояткой");
+                        }
+                        @if (pnevmatica.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Pneumatic", new { pnevmatica.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Pneumatic", new { id = pnevmatica.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Pneumatic", new { id = pnevmatica.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Pneumatic", new { id = pnevmatica.Id })"><span class="middle">@Html.DisplayFor(modelItem => pnevmatica.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => pnevmatica.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", pnevmatica.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Новинка
+                    </div>
+                    <div class="picture">
+                        @{
+                            var maska = Model.Maskis.FirstOrDefault(p => p.Name == "MARLIN Hunter Black просветленные стекла");
+                        }
+                        @if (maska.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Maski", new { maska.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Maski", new { id = maska.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Maski", new { id = maska.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Maski", new { id = maska.Id })"><span class="middle">@Html.DisplayFor(modelItem => maska.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => maska.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", maska.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Новинка
+                    </div>
+                    <div class="picture">
+                        @{
+                            dly_ohoti = Model.Dlya_podvodnoy_okhotys.FirstOrDefault(p => p.Name == "MARLIN Sarmat черный 5 мм");
+                        }
+                        @if (dly_ohoti.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Dlya_podvodnoy_okhoty", new { dly_ohoti.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Dlya_podvodnoy_okhoty", new { id = dly_ohoti.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Dlya_podvodnoy_okhoty", new { id = dly_ohoti.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Dlya_podvodnoy_okhoty", new { id = dly_ohoti.Id })"><span class="middle">@Html.DisplayFor(modelItem => dly_ohoti.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => dly_ohoti.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", dly_ohoti.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Новинка
+                    </div>
+                    <div class="picture">
+                        @{
+                            var nozh = Model.Nozhis.FirstOrDefault(p => p.Name == "PELENGAS Нож с магнитным креплением Volga");
+                        }
+                        @if (nozh.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Nozhi", new { nozh.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Nozhi", new { id = nozh.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Nozhi", new { id = nozh.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Nozhi", new { id = nozh.Id })"><span class="middle">@Html.DisplayFor(modelItem => nozh.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => nozh.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", nozh.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane container-fluid" id="obval_cen">
+            <div class="row">
+                <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Обвал цен
+                    </div>
+                    <div class="picture">
+                        @{
+                            var garpun = Model.Garpuns.FirstOrDefault(p => p.Name == "SEAC SUB Гарпун к Asso 75");
+                        }
+                        @if (garpun.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Garpun", new { garpun.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Garpun", new { id = garpun.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Garpun", new { id = garpun.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Garpun", new { id = garpun.Id })"><span class="middle">@Html.DisplayFor(modelItem => garpun.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => garpun.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", garpun.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Обвал цен
+                    </div>
+                    <div class="picture">
+                        @{
+                            var aksessuary_k_lastam = Model.Aksessuary_k_lastams.FirstOrDefault(p => p.Name == "BEUCHAT Пряжка к ластам X-Jet");
+                        }
+                        @if (aksessuary_k_lastam.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Aksessuary_k_lastam", new { aksessuary_k_lastam.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Aksessuary_k_lastam", new { id = aksessuary_k_lastam.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Aksessuary_k_lastam", new { id = aksessuary_k_lastam.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Aksessuary_k_lastam", new { id = aksessuary_k_lastam.Id })"><span class="middle">@Html.DisplayFor(modelItem => aksessuary_k_lastam.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => aksessuary_k_lastam.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", aksessuary_k_lastam.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Обвал цен
+                    </div>
+                    <div class="picture">
+                        @{
+                            var dly_daivinga = Model.Dlya_dayvinga_i_vodnogo_sportas.FirstOrDefault(p => p.Name == "CRESSI Lui 2.5 mm");
+                        }
+                        @if (dly_daivinga.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Dlya_dayvinga_i_vodnogo_sporta", new { dly_daivinga.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Dlya_dayvinga_i_vodnogo_sporta", new { id = dly_daivinga.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Dlya_dayvinga_i_vodnogo_sporta", new { id = dly_daivinga.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Dlya_dayvinga_i_vodnogo_sporta", new { id = dly_daivinga.Id })"><span class="middle">@Html.DisplayFor(modelItem => dly_daivinga.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => dly_daivinga.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", dly_daivinga.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Обвал цен
+                    </div>
+                    <div class="picture">
+                        @{
+                            pnevmatica = Model.Pneumatics.FirstOrDefault(p => p.Name == "CRESSI SL/Star 55");
+                        }
+                        @if (pnevmatica.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Pneumatic", new { pnevmatica.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Pneumatic", new { id = pnevmatica.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Pneumatic", new { id = pnevmatica.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Pneumatic", new { id = pnevmatica.Id })"><span class="middle">@Html.DisplayFor(modelItem => pnevmatica.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => pnevmatica.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", pnevmatica.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane container-fluid" id="akciya">
+            <div class="row">
+                <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Акция
+                    </div>
+                    <div class="picture">
+                        @{
+                            dly_ohoti = Model.Dlya_podvodnoy_okhotys.FirstOrDefault(p => p.Name == "MARLIN Zeus Camo сендвич 7 mm");
+                        }
+                        @if (dly_ohoti.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Dlya_podvodnoy_okhoty", new { dly_ohoti.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Dlya_podvodnoy_okhoty", new { id = dly_ohoti.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Dlya_podvodnoy_okhoty", new { id = dly_ohoti.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Dlya_podvodnoy_okhoty", new { id = dly_ohoti.Id })"><span class="middle">@Html.DisplayFor(modelItem => dly_ohoti.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => dly_ohoti.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", dly_ohoti.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Акция
+                    </div>
+                    <div class="picture">
+                        @{
+                            var percatki = Model.Perchatkis.FirstOrDefault(p => p.Name == "MARLIN SUPERSTRETCH 4 mm, размер М");
+                        }
+                        @if (percatki.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Perchatki", new { percatki.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Perchatki", new { id = percatki.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Perchatki", new { id = percatki.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Perchatki", new { id = percatki.Id })"><span class="middle">@Html.DisplayFor(modelItem => percatki.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => percatki.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", percatki.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Акция
+                    </div>
+                    <div class="picture">
+                        @{
+                            item = Model.Chekhly_setkis.FirstOrDefault(p => p.Name == "CRESSI Сумка Gorilla");
+                        }
+                        @if (item.ImageData != null)
+                           {
+                               <img src="@Url.Action("GetImage", "Chekhly_setki", new { item.Id })" />
+                            }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Chekhly_setki", new { id = item.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Chekhly_setki", new { id = item.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Chekhly_setki", new { id = item.Id })"><span class="middle">@Html.DisplayFor(modelItem => item.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => item.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                             @Html.Hidden("returnId", item.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                              <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+                <div class="tabloid-item col-xl-3 col-lg-6 d-none d-md-block">
+                    <div class="marker">
+                        Акция
+                    </div>
+                    <div class="picture">
+                        @{
+                            var prochee = Model.Prochees.FirstOrDefault(p => p.Name == "PELENGAS Безопасная заряжалка 14 мм");
+                        }
+                        @if (prochee.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Prochee", new { prochee.Id })" />
+                        }
+                        @Html.ActionLink("Быстрый просмотр", "DetailsModal", "Prochee", new { id = prochee.Id }, new { @class = "getFastView" })
+                        @Html.Hidden("RedirectTo", Url.Action("Details", "Prochee", new { id = prochee.Id }))
+                    </div>
+                    <a class="name" href="@Url.Action("Details", "Prochee", new { id = prochee.Id })"><span class="middle">@Html.DisplayFor(modelItem => prochee.Name)</span></a>
+                    <a class="price">@Html.DisplayFor(modelItem => prochee.Price)<span> грн</span><span class="measure">/шт</span></a>
+                    <div class="addCart">
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("returnId", prochee.Id)
+                            @Html.Hidden("returnUrl", "/Home/Index")
+                            <input id="cart" type="submit" value="В корзину" />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="popSection">
+    <div class="row">
+        <div class="popHead col-xl-12">
+            <a class="section" href="#">Популярные категории товаров</a>
+        </div>
+    </div>
+</div>
+<div class="popularBody">
+    <div class="row">
+        <div class="popItem col-xl-2 col-lg-4 col-md-6 col-sm-6">
+            <a class="picture" href="@Url.Action("List", "Pneumatic", null)">
+                <img alt="Marez Сумка Attack Titan" src="~/Images/pnevmatika.jpg" />
+            </a>
+            <div class="link-wrap">
+                @Html.ActionLink("Ружья", "Ruzhya", "Home", new { area = "" }, new { @class = "name" })
+                &nbsp;→
+                @Html.ActionLink("Пневматика", "List", "Pneumatic", new { area = "" }, new { @class = "name" })
+            </div>
+        </div>
+        <div class="popItem col-xl-2 col-lg-4 col-md-6 col-sm-6">
+            <a class="picture" href="@Url.Action("List", "Perchatki", null)">
+                <img alt="Marez Сумка Attack Titan" src="~/Images/perchatki.jpg" />
+            </a>
+            <div class="link-wrap">
+                @Html.ActionLink("Носки, Боты, Перчатки", "Noski_boty_perchatki", "Home", new { area = "" }, new { @class = "name" })
+                &nbsp;→
+                @Html.ActionLink("Перчатки", "List", "Perchatki", new { area = "" }, new { @class = "name" })
+            </div>
+        </div>
+        <div class="popItem col-xl-2 col-lg-4 col-md-6 col-sm-6">
+            <a class="picture" href="@Url.Action("List", "Maski", null)">
+                <img alt="Marez Сумка Attack Titan" src="~/Images/maski.jpg" />
+            </a>
+            <div class="link-wrap">
+                @Html.ActionLink("Ласты, Маски, Трубки", "Lasty_maski_trubki", "Home", new { area = "" }, new { @class = "name" })
+                &nbsp;→
+                @Html.ActionLink("Маски", "List", "Maski", new { area = "" }, new { @class = "name" })
+            </div>
+        </div>
+        <div class="popItem col-xl-2 col-lg-4 col-md-6 col-sm-6">
+            <a class="picture" href="@Url.Action("List", "Dlya_podvodnoy_okhoty", null)">
+                <img alt="Marez Сумка Attack Titan" src="~/Images/dlya_podvodnoi_ohoti.jpg" />
+            </a>
+            <div class="link-wrap">
+                @Html.ActionLink("Гидрокостюмы", "Gidrokostyumy", "Home", new { area = "" }, new { @class = "name" })
+                &nbsp;→
+                @Html.ActionLink("Для подводной охоты", "List", "Dlya_podvodnoy_okhoty", new { area = "" }, new { @class = "name" })
+            </div>
+        </div>
+        <div class="popItem col-xl-2 col-lg-4 col-md-6 col-sm-6">
+            <a class="picture" href="@Url.Action("List", "Lasty_dlya_okhoty", null)">
+                <img alt="Marez Сумка Attack Titan" src="~/Images/lasti.jpg" />
+            </a>
+            <div class="link-wrap">
+                @Html.ActionLink("Ласты, Маски, Трубки", "Lasty_maski_trubki", "Home", new { area = "" }, new { @class = "name" })
+                &nbsp;→
+                @Html.ActionLink("Ласты для охоты", "List", "Lasty_dlya_okhoty", new { area = "" }, new { @class = "name" })
+            </div>
+        </div>
+        <div class="popItem col-xl-2 col-lg-4 col-md-6 col-sm-6">
+            <a class="picture" href="@Url.Action("List", "Fonari" , null)">
+                <img alt="Marez Сумка Attack Titan" src="~/Images/fonari.jpg" />
+            </a>
+            <div class="link-wrap">
+                @Html.ActionLink("Ножи, Фонари, Груза", "Nozhi_fonari_gruza", "Home", new { area = "" }, new { @class = "name" })
+                &nbsp;→
+                @Html.ActionLink("Фонари", "List", "Fonari", new { area = "" }, new { @class = "name" })
+            </div>
+        </div>
+        <div class="popItem col-xl-2 col-lg-4 col-md-6 col-sm-6">
+            <a class="picture" href="@Url.Action("Arbalet", "Arbalet" , null)">
+                <img alt="Marez Сумка Attack Titan" src="~/Images/arbaleti.jpg" />
+            </a>
+            <div class="link-wrap">
+                @Html.ActionLink("Ружья", "Ruzhya", "Home", new { area = "" }, new { @class = "name" })
+                &nbsp;→
+                @Html.ActionLink("Арбалеты", "Arbalet", "Arbalet", new { area = "" }, new { @class = "name" })
+            </div>
+        </div>
+        <div class="popItem col-xl-2 col-lg-4 col-md-6 col-sm-6">
+            <a class="picture" href="@Url.Action("List", "Lasty_dlya_dayvinga" , null)">
+                <img alt="Marez Сумка Attack Titan" src="~/Images/lasti_daiving.jpg" />
+            </a>
+            <div class="link-wrap">
+                @Html.ActionLink("Ласты, Маски, Трубки", "Lasty_maski_trubki", "Home", new { area = "" }, new { @class = "name" })
+                &nbsp;→
+                @Html.ActionLink("Ласты для дайвинга", "List", "Lasty_dlya_dayvinga", new { area = "" }, new { @class = "name" })
+            </div>
+        </div>
+        <div class="popItem col-xl-2 col-lg-4 col-md-6 col-sm-6">
+            <a class="picture" href="@Url.Action("List", "Dlya_dayvinga_i_vodnogo_sporta" , null)">
+                <img alt="Marez Сумка Attack Titan" src="~/Images/dlya_daivinga.jpg" />
+            </a>
+            <div class="link-wrap">
+                @Html.ActionLink("Гидрокостюмы", "Gidrokostyumy", "Home", new { area = "" }, new { @class = "name" })
+                &nbsp;→
+                @Html.ActionLink("Для дайвинга", "List", "Dlya_dayvinga_i_vodnogo_sporta", new { area = "" }, new { @class = "name" })
+            </div>
+        </div>
+        <div class="popItem col-xl-2 col-lg-4 col-md-6 col-sm-6">
+            <a class="picture" href="@Url.Action("List", "Nozhi" , null)">
+                <img alt="Marez Сумка Attack Titan" src="~/Images/nogi.jpg" />
+            </a>
+            <div class="link-wrap">
+                @Html.ActionLink("Ножи, Фонари, Груза", "Nozhi_fonari_gruza", "Home", new { area = "" }, new { @class = "name" })
+                &nbsp;→
+                @Html.ActionLink("Ножи", "List", "Nozhi", new { area = "" }, new { @class = "name" })
+            </div>
+        </div>
+        <div class="popItem col-xl-2 col-lg-4 col-md-6 col-sm-6">
+            <a class="picture" href="@Url.Action("List", "Kukany" , null)">
+                <img alt="Marez Сумка Attack Titan" src="~/Images/kukani.jpg" />
+            </a>
+            <div class="link-wrap">
+                @Html.ActionLink("Дополнительно", "Dopolnitelno", "Home", new { area = "" }, new { @class = "name" })
+                &nbsp;→
+                @Html.ActionLink("Куканы", "List", "Kukany", new { area = "" }, new { @class = "name" })
+            </div>
+        </div>
+        <div class="popItem col-xl-2 col-lg-4 col-md-6 col-sm-6">
+            <a class="picture" href="@Url.Action("List", "Bui_i_aksessuary" , null)">
+                <img alt="Marez Сумка Attack Titan" src="~/Images/bui.jpg" />
+            </a>
+            <div class="link-wrap">
+                @Html.ActionLink("Дополнительно", "Dopolnitelno", "Home", new { area = "" }, new { @class = "name" })
+                &nbsp;→
+                @Html.ActionLink("Буи и аксессуары", "List", "Bui_i_aksessuary", new { area = "" }, new { @class = "name" })
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Footer {
+    <div class="text">
+        <h1>Какое снаряжение для подводной охоты нужно покупать?</h1>
+        <div>
+            Времена, когда люди охотились на рыбу, используя заостренную палку — остались далеко в прошлом. Чтобы подводная охота прошла удачно, безопасно, и принесла удовольствие охотнику, необходимо применять целый набор специального оборудования. Снаряжение необходимо и тем, кто занимается другими видами плавания — дайвингом и фридайвингом, снорклингом.
+        </div>
+        <div><br></div>
+        <div style="display: none;" class="nos-text-hide">
+            <div class="nos-text-hide" style="display: block;">
+                <h2 style="margin-left:28.8pt;text-indent:-28.8pt;">
+                    <span lang="RU">
+                        Почему нужно купить снаряжение для
+                        дайвинга и подводной охоты: о необходимости оборудования<o:p></o:p>
+                    </span>
+                </h2>
+                <p class="MsoBodyText">
+                    <span lang="RU">
+                        Использование
+                        специального снаряжения для подводных пловцов необходимо по нескольким
+                        причинам. Его применение позволяет:<o:p></o:p>
+                    </span>
+                </p>
+
+                <p class="MsoBodyText" style="margin-left:36.0pt;text-indent:-18.0pt;">
+                    <!--[if !supportLists]--><span lang="RU">
+                        1.<span style="font-variant-numeric: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family:Times New Roman;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </span>
+                    </span><!--[endif]--><span lang="RU">
+                        Обеспечить
+                        безопасность «подвоха» при любых условиях погружения. <o:p></o:p>
+                    </span>
+                </p>
+
+                <p class="MsoBodyText" style="margin-left:36.0pt;text-indent:-18.0pt;">
+                    <!--[if !supportLists]--><span lang="RU">
+                        2.<span style="font-variant-numeric: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family:Times New Roman;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </span>
+                    </span><!--[endif]--><span lang="RU">
+                        Плавать
+                        долго, не уставая и не прерываясь на частый отдых. <o:p></o:p>
+                    </span>
+                </p>
+
+                <p class="MsoBodyText" style="margin-left:36.0pt;text-indent:-18.0pt;">
+                    <!--[if !supportLists]--><span lang="RU">
+                        3.<span style="font-variant-numeric: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family:Times New Roman;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </span>
+                    </span><!--[endif]--><span lang="RU">
+                        Плавать
+                        в любых условиях — как в чистой, спокойной и теплой морской воде, так и в
+                        холодной реке с быстрым течением и мутной водой. <o:p></o:p>
+                    </span>
+                </p>
+
+                <p class="MsoBodyText" style="margin-left:36.0pt;text-indent:-18.0pt;">
+                    <!--[if !supportLists]--><span lang="RU">
+                        4.<span style="font-variant-numeric: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family:Times New Roman;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </span>
+                    </span><!--[endif]--><span lang="RU">
+                        Охотиться
+                        на любую добычу: от небольшой и до крупной, от медлительной и спокойной и до
+                        быстрой и пугливой. <o:p></o:p>
+                    </span>
+                </p>
+
+                <h2>
+                    Какое можно купить снаряжение для
+                    подводной охоты: о видах и предназначении
+                </h2>
+
+                <p class="MsoBodyText">
+                    <span lang="RU">
+                        Видов
+                        снаряжения, применяемого для охоты под водой — достаточно много. Приведем их
+                        список и разберем вкратце, что и для чего применяется:<o:p></o:p>
+                    </span>
+                </p>
+
+                <p class="MsoBodyText" style="margin-left:36.0pt;text-indent:-18.0pt;">
+                    <!--[if !supportLists]--><span lang="RU">
+                        1.<span style="font-variant-numeric: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family:Times New Roman;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </span>
+                    </span><!--[endif]--><span lang="RU">
+                        Маска.
+                        Позволяет «подвоху» нормально видеть при погружении, не пропуская воду к
+                        глазам. <o:p></o:p>
+                    </span>
+                </p>
+
+                <p class="MsoBodyText" style="margin-left:36.0pt;text-indent:-18.0pt;">
+                    <!--[if !supportLists]--><span lang="RU">
+                        2.<span style="font-variant-numeric: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family:Times New Roman;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </span>
+                    </span><!--[endif]--><span lang="RU">
+                        Ружье
+                        и гарпуны. Применяются для поражения добычи. <o:p></o:p>
+                    </span>
+                </p>
+
+                <p class="MsoBodyText" style="margin-left:36.0pt;text-indent:-18.0pt;">
+                    <!--[if !supportLists]--><span lang="RU">
+                        3.<span style="font-variant-numeric: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family:Times New Roman;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </span>
+                    </span><!--[endif]--><span lang="RU">
+                        Ласты.
+                        Существенно экономят силы пловца, которые он затрачивает на движение. Позволяют
+                        плавать быстрее, дальше и дольше. <o:p></o:p>
+                    </span>
+                </p>
+
+                <p class="MsoBodyText" style="margin-left:36.0pt;text-indent:-18.0pt;">
+                    <!--[if !supportLists]--><span lang="RU">
+                        4.<span style="font-variant-numeric: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family:Times New Roman;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </span>
+                    </span><!--[endif]--><span lang="RU">
+                        Гидрокостюм.
+                        Необходим для сохранения тепла и для защиты кожного покрова от возможных
+                        повреждений. <o:p></o:p>
+                    </span>
+                </p>
+
+                <p class="MsoBodyText" style="margin-left:36.0pt;text-indent:-18.0pt;">
+                    <!--[if !supportLists]--><span lang="RU">
+                        5.<span style="font-variant-numeric: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family:Times New Roman;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </span>
+                    </span><!--[endif]--><span lang="RU">
+                        Трубка.
+                        Позволяет дышать, когда голова охотника опущена под воду. <o:p></o:p>
+                    </span>
+                </p>
+
+                <p class="MsoBodyText" style="margin-left:36.0pt;text-indent:-18.0pt;">
+                    <!--[if !supportLists]--><span lang="RU">
+                        6.<span style="font-variant-numeric: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family:Times New Roman;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </span>
+                    </span><!--[endif]--><span lang="RU">
+                        Грузы.
+                        Используются, чтобы «подвоху» легче было погружаться. <o:p></o:p>
+                    </span>
+                </p>
+
+                <p class="MsoBodyText" style="margin-left:36.0pt;text-indent:-18.0pt;">
+                    <!--[if !supportLists]--><span lang="RU">
+                        7.<span style="font-variant-numeric: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family:Times New Roman;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </span>
+                    </span><!--[endif]--><span lang="RU">
+                        Кукан.
+                        Применяется для хранения добычи. <o:p></o:p>
+                    </span>
+                </p>
+
+                <p class="MsoBodyText" style="margin-left:36.0pt;text-indent:-18.0pt;">
+                    <!--[if !supportLists]--><span lang="RU">
+                        8.<span style="font-variant-numeric: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family:Times New Roman;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </span>
+                    </span><!--[endif]--><span lang="RU">
+                        Нож.
+                        Используется для перерезания веревок, канатов. Также может применяться для
+                        копания, выкручивания болтов, привлечения внимания других пловцов. <o:p></o:p>
+                    </span>
+                </p>
+
+                <p class="MsoBodyText" style="margin-left:36.0pt;text-indent:-18.0pt;">
+                    <!--[if !supportLists]--><span lang="RU">
+                        9.<span style="font-variant-numeric: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family:Times New Roman;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </span>
+                    </span><!--[endif]--><span lang="RU">
+                        Фонарь.
+                        Применяется в мутной воде, на глубине свыше нескольких метров, и в темное время
+                        суток. <o:p></o:p>
+                    </span>
+                </p>
+
+                <p class="MsoBodyText">
+                    <span lang="RU">
+                        Из всего списка
+                        основными являются маска и ружье — с этим минимальным набором уже можно
+                        охотиться под водой. Однако для того, чтобы сделать этот процесс более
+                        безопасным, комфортным и результативным — нужны прочие виды оборудования. <o:p></o:p>
+                    </span>
+                </p>
+
+                <h3>
+                    Где можно купить снаряжение для подводной
+                    охоты в Украине?
+                </h3>
+
+                <p class="MsoBodyText">
+                    <span lang="RU">
+                        Купить
+                        снаряжение для подводной охоты в Украине можно в магазине «Прозрак».
+                        Территориально мы находимся в Киеве: вы можете прийти к нам, и выбрать товар на
+                        месте, увидев его своими глазами. <o:p></o:p>
+                    </span>
+                </p>
+
+                <p class="MsoBodyText">
+                    <span lang="RU">
+                        Если вы
+                        проживаете не в столице — можете подобрать продукцию в онлайн-каталоге нашего
+                        магазина. Чтобы пользователь мог сделать правильный выбор, каждый товар подробно
+                        описан. <o:p></o:p>
+                    </span>
+                </p>
+
+                <p class="MsoBodyText">
+                    <span lang="RU">
+                        Для тех, кто
+                        только начинает заниматься охотой под водой, и не знает, что именно нужно
+                        приобрести — вы всегда можете обратиться к нам за консультацией. В нашем
+                        магазине работают те, кто имеет собственный многолетний опыт: мы с
+                        удовольствием поделимся знаниями, и поможем подобрать оборудование, которое
+                        идеально подойдет именно вам.&nbsp;<o:p></o:p>
+                    </span>
+                </p>
+            </div>
+        </div>
+        <button type="button" class="btn btn-success" id="text">Подробнее</button><div><br></div>
+    </div>
+}
+
+@section Scripts {
+
+    <script>
+        $('.dropdown-menu > .dropdown > a').addClass('dropdown-toggle');
+
+        $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
+            if (!$(this).next().hasClass('show')) {
+                $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+            }
+            var $subMenu = $(this).next(".dropdown-menu");
+            $subMenu.toggleClass('show');
+            $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
+                $('.dropdown-menu > .dropdown .show').removeClass("show");
+            });
+            return false;
+        });
+    </script>
+    <script>
+        var myIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            myIndex++;
+            if (myIndex > x.length) { myIndex = 1 }
+            x[myIndex - 1].style.display = "block";
+            setTimeout(carousel, 9000);
+        }
+    </script>
+
+    <script>
+        $(window).resize(function () {
+            if (window.matchMedia("(max-width: 992px)").matches) {
+                $('.shapka ul.row li.nav-item').last().css("display", "none");
+                $('.shapka ul.row li.nav-item').eq(1).css("display", "none");
+                $('.shapka ul.row li.nav-item').eq(2).css("display", "none");
+            }
+            if ((window.matchMedia("(min-width: 992px)").matches) && (window.matchMedia("(max-width: 1200px)").matches)) {
+                $('.shapka ul.row li.nav-item').css("display", "block");
+                $('.shapka ul.row li.nav-item').last().css("display", "none");
+                $('.shapka ul.row li.nav-item').eq(2).css("display", "none");
+                $('#2').css("background-color", "red");
+            }
+            if ((window.matchMedia("(min-width: 1200px)").matches) && (window.matchMedia("(max-width: 1600px)").matches)) {
+                $('.shapka ul.row li.nav-item').css("display", "block");
+                $('.shapka ul.row li.nav-item').last().css("display", "none");
+                $('.shapka ul.row li.nav-item').removeClass("col-xl-3");
+                $('.shapka ul.row li.nav-item').addClass("col-xl-4");
+                $('.tab-content > .tab-pane .row .tabloid-item').removeClass("col-xl-3");
+                $('.tab-content > .tab-pane .row .tabloid-item').addClass("col-xl-4");
+                $('.popItem').removeClass("col-xl-2");
+                $('.popItem').addClass("col-xl-3");
+            }
+            if (window.matchMedia("(min-width: 1600px)").matches) {
+                $('.shapka ul.row li.nav-item').css("display", "block");
+                $('.shapka ul.row li.nav-item').removeClass("col-xl-4");
+                $('.shapka ul.row li.nav-item').addClass("col-xl-3");
+                $('.tab-content > .tab-pane .row .tabloid-item').removeClass("col-xl-4");
+                $('.tab-content > .tab-pane .row .tabloid-item').addClass("col-xl-3");
+                $('.popItem').removeClass("col-xl-3");
+                $('.popItem').addClass("col-xl-2");
+            }
+        });
+
+        $(document).ready(function () {
+            if (window.matchMedia("(max-width: 992px)").matches) {
+                $('.shapka ul.row li.nav-item').last().css("display", "none");
+                $('.shapka ul.row li.nav-item').eq(1).css("display", "none");
+                $('.shapka ul.row li.nav-item').eq(2).css("display", "none");
+            }
+            if ((window.matchMedia("(min-width: 992px)").matches) && (window.matchMedia("(max-width: 1200px)").matches)) {
+                $('.shapka ul.row li.nav-item').last().css("display", "none");
+                $('.shapka ul.row li.nav-item').eq(2).css("display", "none");
+                $('#2').css("background-color", "red");
+            }
+            if ((window.matchMedia("(min-width: 1200px)").matches) && (window.matchMedia("(max-width: 1600px)").matches)) {
+                $('.shapka ul.row li.nav-item').css("display", "block");
+                $('.shapka ul.row li.nav-item').last().css("display", "none");
+                $('.shapka ul.row li.nav-item').removeClass("col-xl-3");
+                $('.shapka ul.row li.nav-item').addClass("col-xl-4");
+                $('.popItem').removeClass("col-xl-2");
+                $('.popItem').addClass("col-xl-3");
+            }
+            if (window.matchMedia("(min-width: 1600px)").matches) {
+                $('.shapka ul.row li.nav-item').css("display", "block");
+                $('.shapka ul.row li.nav-item').removeClass("col-xl-4");
+                $('.shapka ul.row li.nav-item').addClass("col-xl-3");
+                $('.popItem').addClass("col-xl-2");
+            }
+            var x = document.getElementById("demo");
+            $(".vpered").click(function () {
+                if (window.matchMedia("(max-width: 992px)").matches) {
+                    $('.shapka ul.row li.nav-item').css("display", "block");
+                    var first = $(".shapka ul.row li.nav-item:first");
+                    var last = $(".shapka ul.row li.nav-item:last");
+                    last.insertBefore(first);
+                    $('.shapka ul.row li.nav-item').last().css("display", "none");
+                    $('.shapka ul.row li.nav-item').eq(2).css("display", "none");
+                    $('.shapka ul.row li.nav-item').eq(1).css("display", "none");
+                }
+                if ((window.matchMedia("(min-width: 992px)").matches) && (window.matchMedia("(max-width: 1200px)").matches)) {
+                    $('.shapka ul.row li.nav-item').css("display", "block");
+                    var first = $(".shapka ul.row li.nav-item:first");
+                    var last = $(".shapka ul.row li.nav-item:last");
+                    last.insertBefore(first);
+                    $('.shapka ul.row li.nav-item').last().css("display", "none");
+                    $('.shapka ul.row li.nav-item').eq(2).css("display", "none");
+                }
+                if ((window.matchMedia("(min-width: 1200px)").matches) && (window.matchMedia("(max-width: 1600px)").matches)) {
+                    $('.shapka ul.row li.nav-item').last().css("display", "block");
+                    var first = $(".shapka ul.row li.nav-item:first");
+                    var last = $(".shapka ul.row li.nav-item:last");
+                    last.insertBefore(first);
+                    $('.shapka ul.row li.nav-item').last().css("display", "none");
+                }
+                if (window.matchMedia("(min-width: 1600px)").matches) {
+                    var first = $(".shapka ul.row li.nav-item:first");
+                    var last = $(".shapka ul.row li.nav-item:last");
+                    last.insertBefore(first);
+                }
+            });
+            $(".nazad").click(function () {
+                if (window.matchMedia("(max-width: 992px)").matches) {
+                    $('.shapka ul.row li.nav-item').css("display", "block");
+                    var first = $(".shapka ul.row li.nav-item:first");
+                    var last = $(".shapka ul.row li.nav-item:last");
+                    first.insertAfter(last);
+                    $('.shapka ul.row li.nav-item').last().css("display", "none");
+                    $('.shapka ul.row li.nav-item').eq(2).css("display", "none");
+                    $('.shapka ul.row li.nav-item').eq(1).css("display", "none");
+                }
+                if ((window.matchMedia("(min-width: 992px)").matches) && (window.matchMedia("(max-width: 1200px)").matches)) {
+                    $('.shapka ul.row li.nav-item').css("display", "block");
+                    var first = $(".shapka ul.row li.nav-item:first");
+                    var last = $(".shapka ul.row li.nav-item:last");
+                    first.insertAfter(last);
+                    $('.shapka ul.row li.nav-item').last().css("display", "none");
+                    $('.shapka ul.row li.nav-item').eq(2).css("display", "none");
+                }
+                if ((window.matchMedia('(min-width: 1200px)').matches) && (window.matchMedia("(max-width: 1600px)").matches)) {
+                    $('.shapka ul.row li.nav-item').last().css("display", "block");
+                    var first = $(".shapka ul.row li.nav-item:first");
+                    var last = $(".shapka ul.row li.nav-item:last");
+                    first.insertAfter(last);
+                    $('.shapka ul.row li.nav-item').last().css("display", "none");
+                }
+                if (window.matchMedia("(min-width: 1600px)").matches) {
+                    $('.shapka ul.row li.nav-item').last().css("display", "block");
+                    var first = $(".shapka ul.row li.nav-item:first");
+                    var last = $(".shapka ul.row li.nav-item:last");
+                    first.insertAfter(last);
+                }
+
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $(".tabloid-item").mouseover(function () {
+                $(this).children(".addCart").css("display", "block");
+                $(this).css("margin-bottom", "-90px");
+                $(this).css("z-index", "100");
+                $(this).css("background-color", "white");
+            });
+            $(".tabloid-item").mouseout(function () {
+                $(this).children(".addCart").css("display", "none");
+                $(this).css("margin-bottom", "0");
+                $(this).css("z-index", "0");
+            });
+        });
+    </script>
+    <script type="text/javascript">
+
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $(".getFastView").click(function (e) {
+
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+        })
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $(".picture").on('click', ':not(a.getFastView)', function () {
+                var url = $(this).parent().children("#RedirectTo").val();
+                window.location.href = url;
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var flag = 0;
+            $('button#text').click(function () {
+
+                if (flag == 0) {
+                    $(".nos-text-hide").show("slow");// 1-ое действие
+                    flag = 1;
+                    $('button#text').html("Скрыть");
+                }
+                else if (flag == 1) {
+                    $(".nos-text-hide").hide("slow");// 2-ое действие
+                    flag = 0;
+                    $('button#text').html("Подробнее");
+                }
+            });
+        });
+
+    </script>
+}

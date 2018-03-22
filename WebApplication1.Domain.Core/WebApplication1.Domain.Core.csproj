@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{39B5D937-AC58-4BB0-A713-165EBF8077FB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebApplication1.Domain.Core</RootNamespace>
+    <AssemblyName>WebApplication1.Domain.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Aksessuary_k_fonaryam.cs" />
+    <Compile Include="Aksessuary_k_gidrokostyumam.cs" />
+    <Compile Include="Aksessuary_k_gruzam.cs" />
+    <Compile Include="Aksessuary_k_lastam.cs" />
+    <Compile Include="Aksessuary_k_maskam.cs" />
+    <Compile Include="Aksessuary_k_nozham.cs" />
+    <Compile Include="Aksessuary_k_sukhim_gidrokostyumam.cs" />
+    <Compile Include="Aksessuary_k_trubkam.cs" />
+    <Compile Include="Arbalet.cs" />
+    <Compile Include="Arbaletnaya_tyaga.cs" />
+    <Compile Include="Arbaletniy_zacep.cs" />
+    <Compile Include="Boty.cs" />
+    <Compile Include="Brand.cs" />
+    <Compile Include="Bui_i_aksessuary.cs" />
+    <Compile Include="Cart.cs" />
+    <Compile Include="Chekhly_setki.cs" />
+    <Compile Include="Dlya_dayvinga_i_vodnogo_sporta.cs" />
+    <Compile Include="Dlya_podvodnoy_okhoty.cs" />
+    <Compile Include="Fonari.cs" />
+    <Compile Include="Futbolki_i_shorty_dlya_vodnogo_sporta.cs" />
+    <Compile Include="Garpun.cs" />
+    <Compile Include="Gruza_i_gruzovye_sistemy.cs" />
+    <Compile Include="Katushka.cs" />
+    <Compile Include="Katushki_khodovye.cs" />
+    <Compile Include="Khimicheskie_sredstva_i_masla.cs" />
+    <Compile Include="Komplekty.cs" />
+    <Compile Include="Kukany.cs" />
+    <Compile Include="Lasty_dlya_dayvinga.cs" />
+    <Compile Include="Lasty_dlya_okhoty.cs" />
+    <Compile Include="Lin.cs" />
+    <Compile Include="Maski.cs" />
+    <Compile Include="Mulyazhi.cs" />
+    <Compile Include="Nakonechnik.cs" />
+    <Compile Include="Noski.cs" />
+    <Compile Include="Nozhi.cs" />
+    <Compile Include="Perchatki.cs" />
+    <Compile Include="Pneumatic.cs" />
+    <Compile Include="Poleznye_aksessuary.cs" />
+    <Compile Include="Prochee.cs" />
+    <Compile Include="Product.cs" />
+    <Compile Include="Product1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rukavitsy.cs" />
+    <Compile Include="ShippingDetails.cs" />
+    <Compile Include="Shlemy.cs" />
+    <Compile Include="Shtany_i_kurtki.cs" />
+    <Compile Include="Sukhie.cs" />
+    <Compile Include="Tapochki.cs" />
+    <Compile Include="Trubki.cs" />
+    <Compile Include="Utepliteli_dlya_gidrokostyumov.cs" />
+    <Compile Include="Utepliteli_dlya_sukhikh_gidrokostyumov.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
