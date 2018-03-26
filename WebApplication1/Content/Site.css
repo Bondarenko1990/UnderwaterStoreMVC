@@ -1062,7 +1062,8 @@ p.text{
 
 .modal-dialog {
     z-index: 1050;
-    width: 900px;
+    max-width: 100%;
+    width: 900px !important;
     padding: 10px;
     margin-right: auto;
     margin-left: auto;

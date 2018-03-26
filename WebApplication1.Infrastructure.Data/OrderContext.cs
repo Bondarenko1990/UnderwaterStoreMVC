@@ -5,12 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using WebApplication1.Domain.Core;
+using System.Data.Entity.Infrastructure;
 
 namespace WebApplication1.Infrastructure.Data
 {
     public class OrderContext : DbContext
     {
-        public OrderContext() :  base("OrderContext") { }
+        public OrderContext() :  base("name=OrderContext") {
+            var adapter = (IObjectContextAdapter)this;
+            var objectContext = adapter.ObjectContext;
+            objectContext.CommandTimeout = 1 * 60; // value in seconds
+        }
         public DbSet<Poleznye_aksessuary> Poleznye_aksessuarys { get; set; }
         public DbSet<Mulyazhi> Mulyazhis { get; set; }
         public DbSet<Chekhly_setki> Chekhly_setkis { get; set; }

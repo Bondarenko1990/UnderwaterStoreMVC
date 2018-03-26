@@ -9,18 +9,22 @@ namespace WebApplication1.Domain.Core
 {
     public class ShippingDetails
     {
-        [Required(ErrorMessage = "Укажите как вас зовут")]
+        [Required(ErrorMessage = "Укажите ваше имя")]
+        [Display(Name = "Имя")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Вставьте первый адрес доставки")]
-        [Display(Name = "Первый адрес")]
+        [Required(ErrorMessage = "Укажите вашу фамилию")]
+        [Display(Name = "Фамилия")]
+        public string LastName { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Адрес электронной почты")]
+        public string Email { get; set; }
+
+        [Required(ErrorMessage = "Вставьте адрес доставки")]
+        [Display(Name = "Адрес доставки")]
         public string Line1 { get; set; }
-
-        [Display(Name = "Второй адрес")]
-        public string Line2 { get; set; }
-
-        [Display(Name = "Третий адрес")]
-        public string Line3 { get; set; }
 
         [Required(ErrorMessage = "Укажите город")]
         [Display(Name = "Город")]

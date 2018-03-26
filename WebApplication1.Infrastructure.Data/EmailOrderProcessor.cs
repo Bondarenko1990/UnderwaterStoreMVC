@@ -17,7 +17,7 @@ namespace WebApplication1.Infrastructure.Data
         public string MailFromAddress = "bondsergeyua@gmail.com";
         public bool UseSsl = true;
         public string Username = "bondsergeyua@gmail.com";
-        public string Password = "************";
+        public string Password = "infinityfx35";
         public string ServerName = "smtp.gmail.com";
         public int ServerPort = 587;
         public bool WriteAsFile = true;
@@ -56,34 +56,34 @@ namespace WebApplication1.Infrastructure.Data
                     //}
 
                     StringBuilder body = new StringBuilder()
-                        .AppendLine("Новый заказ обработан")
-                        .AppendLine("---")
+                        .AppendLine("Ваш заказ обработан")
+                        .AppendLine("-------------------------------------------------------------------------------------------------")
                         .AppendLine("Товары:");
 
                     foreach (var line in cart.Lines)
                     {
                         var subtotal = line.Product.Price * line.Quantity;
-                        body.AppendFormat("{0} x {1} (итого: {2} грн)",
-                            line.Quantity, line.Product.Name, subtotal);
+                        body.AppendFormat("{0} x {1} (итого: {2} грн)"+"\n",
+                        line.Quantity, line.Product.Name, subtotal);
                     }
+                    body.AppendLine("--------------------------------------------------------------------------------------------------");
 
-                    body.AppendFormat("Общая стоимость: {0} грн", cart.ComputeTotalValue())
-                        .AppendLine("---")
+                    body.AppendFormat("Общая стоимость: {0} грн" + "\n", cart.ComputeTotalValue())
+                        .AppendLine("--------------------------------------------------------------------------------------------------")
                         .AppendLine("Доставка:")
-                        .AppendLine(shippingInfo.Name)
-                        .AppendLine(shippingInfo.Line1)
-                        .AppendLine(shippingInfo.Line2 ?? "")
-                        .AppendLine(shippingInfo.Line3 ?? "")
-                        .AppendLine(shippingInfo.City)
-                        .AppendLine(shippingInfo.Country)
-                        .AppendLine("---")
-                        .AppendFormat("Подарочная упаковка: {0}",
-                            shippingInfo.GiftWrap ? "Да" : "Нет");
-
+                        .AppendLine("Имя: "+ shippingInfo.Name)
+                        .AppendLine("Фамилия: "+ shippingInfo.LastName)
+                        .AppendLine("Страна: " + shippingInfo.Country)
+                        .AppendLine("Город: " + shippingInfo.City)
+                        .AppendLine("Адрес: " + shippingInfo.Line1)
+                        .AppendLine("--------------------------------------------------------------------------------------------------")
+                        .AppendFormat("Подарочная упаковка: {0}" + "\n",
+                            shippingInfo.GiftWrap ? "Да" : "Нет")
+                        .AppendLine("----------------------------Спасибо за покупку!-----------------------------------");
                     MailMessage mailMessage = new MailMessage(
                                            emailSettings.MailFromAddress,
-                                           emailSettings.MailToAddress,
-                                           "Новый заказ отправлен!",
+                                           shippingInfo.Email,
+                                           "Ваш заказ",
                                            body.ToString());
 
                     if (emailSettings.WriteAsFile)
