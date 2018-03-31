@@ -9,7 +9,7 @@
         @Html.ActionLink("Главная", "Index", "Home", new { area = "" }, new { @class = "breadcrumb-item" })
         @Html.ActionLink("Каталог товаров", "Catalog", "Home", new { area = "" }, new { @class = "breadcrumb-item" })
         @Html.ActionLink("Ножи, Фонари, Груза", "Nozhi_fonari_gruza", "Home", new { area = "" }, new { @class = "breadcrumb-item" })
-        <a class="breadcrumb-item" href="#">Фонари</a>
+        @Html.ActionLink("Фонари", "List", "Fonari", new { area = "" }, new { @class = "dropdown-item" })
         <span class="breadcrumb-item active">@Model.Name</span>
     </nav>
 </div>
