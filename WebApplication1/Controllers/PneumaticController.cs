@@ -250,7 +250,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public ActionResult Filter(int MinPrice, int MaxPrice, string[] brand, string[] country, int[] garpun, bool[] regpower, int[] length)
+        public ActionResult Filter(int MinPrice, int MaxPrice, string[] brand, string[] country, decimal[] garpun, bool[] regpower, int[] length)
         {
             int count = unitOfWork.Pneumatics.GetAll().Count();
             List<Pneumatic> Item = unitOfWork.Pneumatics.GetAll().Where(p => p.Price >= MinPrice && p.Price <= MaxPrice).ToList();
@@ -319,7 +319,7 @@ namespace WebApplication1.Controllers
             if (garpun != null)
             {
                 newItem = new List<Pneumatic>();
-                int a = 0;
+                decimal a = 0;
                 for (int i = 0; i < garpun.Count(); i++)
                 {
 
